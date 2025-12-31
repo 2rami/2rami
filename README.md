@@ -1,6 +1,10 @@
 <!-- Header -->
 <div align="center">
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/user.svg" width="64" alt="pixel user"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/user-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/user-dark.svg">
+    <img src="./assets/icons/user-dark.svg" alt="user" width="64"/>
+  </picture>
   <h1>2rami</h1>
   <sub>Designer + AI-Assisted Developer</sub>
 </div>
@@ -9,9 +13,21 @@
 
 <!-- Pixel Divider -->
 <div align="center">
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24"/>
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24"/>
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevrons-horizontal-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevrons-horizontal-dark.svg">
+    <img src="./assets/icons/chevrons-horizontal-dark.svg" alt="divider" width="24"/>
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevrons-horizontal-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevrons-horizontal-dark.svg">
+    <img src="./assets/icons/chevrons-horizontal-dark.svg" alt="divider" width="24"/>
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevrons-horizontal-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevrons-horizontal-dark.svg">
+    <img src="./assets/icons/chevrons-horizontal-dark.svg" alt="divider" width="24"/>
+  </picture>
 </div>
 
 <br/>
@@ -36,9 +52,21 @@
 
 <!-- Pixel Divider -->
 <div align="center">
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24"/>
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24"/>
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevrons-horizontal-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevrons-horizontal-dark.svg">
+    <img src="./assets/icons/chevrons-horizontal-dark.svg" alt="divider" width="24"/>
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevrons-horizontal-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevrons-horizontal-dark.svg">
+    <img src="./assets/icons/chevrons-horizontal-dark.svg" alt="divider" width="24"/>
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevrons-horizontal-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevrons-horizontal-dark.svg">
+    <img src="./assets/icons/chevrons-horizontal-dark.svg" alt="divider" width="24"/>
+  </picture>
 </div>
 
 <br/>
@@ -48,38 +76,94 @@
 <div align="center">
 
 ### Development
-<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/code.svg" width="48" alt="code"/>
-<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/terminal.svg" width="48" alt="terminal"/>
-<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/script.svg" width="48" alt="script"/>
-<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/file-code.svg" width="48" alt="file-code"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/code-light.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/code-dark.svg">
+  <img src="./assets/icons/code-dark.svg" alt="code" width="48"/>
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/script-light.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/script-dark.svg">
+  <img src="./assets/icons/script-dark.svg" alt="script" width="48"/>
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/message-processing-light.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/message-processing-dark.svg">
+  <img src="./assets/icons/message-processing-dark.svg" alt="bot" width="48"/>
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/server-light.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/server-dark.svg">
+  <img src="./assets/icons/server-dark.svg" alt="api" width="48"/>
+</picture>
 <br/>
 <sub>Python | JavaScript | Discord.py | FastAPI</sub>
 
 <br/><br/>
 
 ### AI Tools
-<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/message-processing.svg" width="48" alt="ai"/>
-<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chat.svg" width="48" alt="chat"/>
-<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/zap.svg" width="48" alt="copilot"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chat-light.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chat-dark.svg">
+  <img src="./assets/icons/chat-dark.svg" alt="claude" width="48"/>
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/message-processing-light.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/message-processing-dark.svg">
+  <img src="./assets/icons/message-processing-dark.svg" alt="chatgpt" width="48"/>
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/zap-light.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/zap-dark.svg">
+  <img src="./assets/icons/zap-dark.svg" alt="copilot" width="48"/>
+</picture>
 <br/>
 <sub>Claude | ChatGPT | GitHub Copilot</sub>
 
 <br/><br/>
 
 ### Design
-<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/paint-bucket.svg" width="48" alt="design"/>
-<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/image.svg" width="48" alt="image"/>
-<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/edit-box.svg" width="48" alt="edit"/>
-<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/layout.svg" width="48" alt="layout"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/paint-bucket-light.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/paint-bucket-dark.svg">
+  <img src="./assets/icons/paint-bucket-dark.svg" alt="figma" width="48"/>
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/image-light.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/image-dark.svg">
+  <img src="./assets/icons/image-dark.svg" alt="photoshop" width="48"/>
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/edit-box-light.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/edit-box-dark.svg">
+  <img src="./assets/icons/edit-box-dark.svg" alt="illustrator" width="48"/>
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/layout-light.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/layout-dark.svg">
+  <img src="./assets/icons/layout-dark.svg" alt="xd" width="48"/>
+</picture>
 <br/>
 <sub>Figma | Photoshop | Illustrator | Adobe XD</sub>
 
 <br/><br/>
 
 ### Tools
-<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/git-branch.svg" width="48" alt="git"/>
-<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/git-merge.svg" width="48" alt="github"/>
-<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/server.svg" width="48" alt="vscode"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/git-branch-light.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/git-branch-dark.svg">
+  <img src="./assets/icons/git-branch-dark.svg" alt="git" width="48"/>
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/git-merge-light.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/git-merge-dark.svg">
+  <img src="./assets/icons/git-merge-dark.svg" alt="github" width="48"/>
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/code-light.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/code-dark.svg">
+  <img src="./assets/icons/code-dark.svg" alt="vscode" width="48"/>
+</picture>
 <br/>
 <sub>Git | GitHub | VSCode</sub>
 
@@ -89,9 +173,21 @@
 
 <!-- Pixel Divider -->
 <div align="center">
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24"/>
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24"/>
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevrons-horizontal-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevrons-horizontal-dark.svg">
+    <img src="./assets/icons/chevrons-horizontal-dark.svg" alt="divider" width="24"/>
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevrons-horizontal-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevrons-horizontal-dark.svg">
+    <img src="./assets/icons/chevrons-horizontal-dark.svg" alt="divider" width="24"/>
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevrons-horizontal-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevrons-horizontal-dark.svg">
+    <img src="./assets/icons/chevrons-horizontal-dark.svg" alt="divider" width="24"/>
+  </picture>
 </div>
 
 ## GitHub Stats
@@ -105,9 +201,21 @@
 
 <!-- Pixel Divider -->
 <div align="center">
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24" alt="divider"/>
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24" alt="divider"/>
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24" alt="divider"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevrons-horizontal-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevrons-horizontal-dark.svg">
+    <img src="./assets/icons/chevrons-horizontal-dark.svg" alt="divider" width="24"/>
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevrons-horizontal-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevrons-horizontal-dark.svg">
+    <img src="./assets/icons/chevrons-horizontal-dark.svg" alt="divider" width="24"/>
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevrons-horizontal-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevrons-horizontal-dark.svg">
+    <img src="./assets/icons/chevrons-horizontal-dark.svg" alt="divider" width="24"/>
+  </picture>
 </div>
 
 <br/>
@@ -122,9 +230,21 @@
 
 <!-- Pixel Divider -->
 <div align="center">
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24" alt="divider"/>
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24" alt="divider"/>
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24" alt="divider"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevrons-horizontal-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevrons-horizontal-dark.svg">
+    <img src="./assets/icons/chevrons-horizontal-dark.svg" alt="divider" width="24"/>
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevrons-horizontal-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevrons-horizontal-dark.svg">
+    <img src="./assets/icons/chevrons-horizontal-dark.svg" alt="divider" width="24"/>
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevrons-horizontal-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevrons-horizontal-dark.svg">
+    <img src="./assets/icons/chevrons-horizontal-dark.svg" alt="divider" width="24"/>
+  </picture>
 </div>
 
 <br/>
@@ -141,9 +261,21 @@
 
 <!-- Pixel Divider -->
 <div align="center">
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24" alt="divider"/>
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24" alt="divider"/>
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24" alt="divider"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevrons-horizontal-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevrons-horizontal-dark.svg">
+    <img src="./assets/icons/chevrons-horizontal-dark.svg" alt="divider" width="24"/>
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevrons-horizontal-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevrons-horizontal-dark.svg">
+    <img src="./assets/icons/chevrons-horizontal-dark.svg" alt="divider" width="24"/>
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevrons-horizontal-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevrons-horizontal-dark.svg">
+    <img src="./assets/icons/chevrons-horizontal-dark.svg" alt="divider" width="24"/>
+  </picture>
 </div>
 
 <br/>
@@ -151,8 +283,16 @@
 ## Connect
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/message.svg" width="48" alt="discord"/>
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/git-branch.svg" width="48" alt="github"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/message-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/message-dark.svg">
+    <img src="./assets/icons/message-dark.svg" alt="discord" width="48"/>
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/git-branch-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/git-branch-dark.svg">
+    <img src="./assets/icons/git-branch-dark.svg" alt="github" width="48"/>
+  </picture>
   <br/>
   <sub>Discord: @omufrozen | GitHub: 2rami</sub>
 </div>
@@ -161,7 +301,19 @@
 
 <!-- Pixel Footer -->
 <div align="center">
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevron-down.svg" width="32" alt="footer"/>
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/heart.svg" width="32" alt="footer"/>
-  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevron-down.svg" width="32" alt="footer"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevron-down-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevron-down-dark.svg">
+    <img src="./assets/icons/chevron-down-dark.svg" alt="footer" width="32"/>
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/heart-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/heart-dark.svg">
+    <img src="./assets/icons/heart-dark.svg" alt="heart" width="32"/>
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevron-down-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevron-down-dark.svg">
+    <img src="./assets/icons/chevron-down-dark.svg" alt="footer" width="32"/>
+  </picture>
 </div>
