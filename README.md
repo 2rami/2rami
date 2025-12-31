@@ -1,58 +1,98 @@
-<!-- Header with Capsule Render -->
+<!-- Header -->
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=2rami&fontSize=42&fontColor=fff&animation=twinkling&fontAlignY=32&desc=Designer%20%2B%20AI-Assisted%20Developer&descAlignY=52&descSize=18" width="100%"/>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/user.svg" width="64" alt="pixel user"/>
+  <h1>2rami</h1>
+  <sub>Designer + AI-Assisted Developer</sub>
 </div>
 
+<br/>
+
+<!-- Pixel Divider -->
 <div align="center">
-  <img src="https://komarev.com/ghpvc/?username=2rami&style=flat-square&color=6C63FF" alt="Profile Views"/>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24"/>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24"/>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24"/>
 </div>
 
----
+<br/>
 
 ## About Me
 
-```yaml
-name: 2rami (모묘모)
-location: South Korea
-background: Design Student
-current_focus: AI-Assisted Development
-interests:
-  - Discord Bot Development
-  - Automation Scripts
-  - Game Development
+```
++----------------------------------+
+|  name: 2rami                     |
+|  location: South Korea           |
+|  background: Design Student      |
+|  focus: AI-Assisted Development  |
++----------------------------------+
+|  interests:                      |
+|    > Discord Bot Development     |
+|    > Automation Scripts          |
+|    > Game Development            |
++----------------------------------+
 ```
 
----
+<br/>
+
+<!-- Pixel Divider -->
+<div align="center">
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24"/>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24"/>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24"/>
+</div>
+
+<br/>
 
 ## Tech Stack
 
 <div align="center">
 
-### Development (AI-Assisted)
-<a href="https://skillicons.dev">
-  <img src="https://skillicons.dev/icons?i=python,js,discord,fastapi&theme=dark" alt="Development Skills"/>
-</a>
+### Development
+<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/code.svg" width="48" alt="code"/>
+<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/terminal.svg" width="48" alt="terminal"/>
+<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/script.svg" width="48" alt="script"/>
+<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/file-code.svg" width="48" alt="file-code"/>
+<br/>
+<sub>Python | JavaScript | Discord.py | FastAPI</sub>
+
+<br/><br/>
 
 ### AI Tools
-<a href="https://skillicons.dev">
-  <img src="https://skillicons.dev/icons?i=github&theme=dark" alt="AI Tools"/>
-</a>
+<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/message-processing.svg" width="48" alt="ai"/>
+<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chat.svg" width="48" alt="chat"/>
+<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/zap.svg" width="48" alt="copilot"/>
 <br/>
 <sub>Claude | ChatGPT | GitHub Copilot</sub>
 
+<br/><br/>
+
 ### Design
-<a href="https://skillicons.dev">
-  <img src="https://skillicons.dev/icons?i=figma,ps,ai,xd&theme=dark" alt="Design Skills"/>
-</a>
+<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/paint-bucket.svg" width="48" alt="design"/>
+<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/image.svg" width="48" alt="image"/>
+<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/edit-box.svg" width="48" alt="edit"/>
+<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/layout.svg" width="48" alt="layout"/>
+<br/>
+<sub>Figma | Photoshop | Illustrator | Adobe XD</sub>
+
+<br/><br/>
 
 ### Tools
-<a href="https://skillicons.dev">
-  <img src="https://skillicons.dev/icons?i=vscode,git,github&theme=dark" alt="Tools"/>
-</a>
+<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/git-branch.svg" width="48" alt="git"/>
+<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/git-merge.svg" width="48" alt="github"/>
+<img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/server.svg" width="48" alt="vscode"/>
+<br/>
+<sub>Git | GitHub | VSCode</sub>
 
 </div>
 
----
+<br/>
+
+<!-- Pixel Divider -->
+<div align="center">
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24"/>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24"/>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24"/>
+</div>
 
 ## GitHub Stats
 
@@ -61,19 +101,33 @@ interests:
   <img src="https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=2rami&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=6C63FF" height="170" alt="Top Languages"/>
 </div>
 
+<br/>
+
+<!-- Pixel Divider -->
 <div align="center">
-  <img src="https://streak-stats.demolab.com?user=2rami&theme=tokyonight&hide_border=true&background=0D1117&ring=6C63FF&fire=6C63FF&currStreakLabel=6C63FF" alt="GitHub Streak"/>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24" alt="divider"/>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24" alt="divider"/>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24" alt="divider"/>
 </div>
 
----
+<br/>
 
-## 3D Contribution
+## Contribution
 
 <div align="center">
   <img src="./profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution"/>
 </div>
 
----
+<br/>
+
+<!-- Pixel Divider -->
+<div align="center">
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24" alt="divider"/>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24" alt="divider"/>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24" alt="divider"/>
+</div>
+
+<br/>
 
 ## Featured Project
 
@@ -83,17 +137,31 @@ interests:
   </a>
 </div>
 
----
+<br/>
+
+<!-- Pixel Divider -->
+<div align="center">
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24" alt="divider"/>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24" alt="divider"/>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevrons-horizontal.svg" width="24" alt="divider"/>
+</div>
+
+<br/>
 
 ## Connect
 
 <div align="center">
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=discord,github&theme=dark" alt="Connect"/>
-  </a>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/message.svg" width="48" alt="discord"/>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/git-branch.svg" width="48" alt="github"/>
   <br/>
   <sub>Discord: @omufrozen | GitHub: 2rami</sub>
 </div>
 
-<!-- Footer with Capsule Render -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=120&section=footer" width="100%"/>
+<br/>
+
+<!-- Pixel Footer -->
+<div align="center">
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevron-down.svg" width="32" alt="footer"/>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/heart.svg" width="32" alt="footer"/>
+  <img src="https://raw.githubusercontent.com/halfmage/pixelarticons/master/svg/chevron-down.svg" width="32" alt="footer"/>
+</div>
