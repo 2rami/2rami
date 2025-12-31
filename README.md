@@ -1,21 +1,10 @@
-<!-- Header -->
+<!-- Header with Capsule Render -->
 <div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=2rami&fontSize=42&fontColor=fff&animation=twinkling&fontAlignY=32&desc=Designer%20%2B%20AI-Assisted%20Developer&descAlignY=52&descSize=18" width="100%"/>
+</div>
 
-  <!-- Typing Animation -->
-  <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=28&duration=3000&pause=1000&color=6C63FF&center=true&vCenter=true&multiline=true&repeat=true&width=600&height=100&lines=Hi%2C+I'm+2rami;Designer+%2B+AI-Assisted+Developer" alt="Typing SVG" />
-  </a>
-
-  <br/>
-
-  <!-- Short Bio -->
-  <p>
-    <b>Design Background</b> | Building with <b>AI Tools</b> | Interested in <b>Discord Bots, Automation, Game Dev</b>
-  </p>
-
-  <!-- Profile Views -->
+<div align="center">
   <img src="https://komarev.com/ghpvc/?username=2rami&style=flat-square&color=6C63FF" alt="Profile Views"/>
-
 </div>
 
 ---
@@ -68,18 +57,20 @@ interests:
 ## GitHub Stats
 
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats-sigma-five.vercel.app/api?username=2rami&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=6C63FF&icon_color=6C63FF"/>
-    <img src="https://github-readme-stats-sigma-five.vercel.app/api?username=2rami&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=6C63FF&icon_color=6C63FF" height="170" alt="GitHub Stats"/>
-  </picture>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=2rami&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=6C63FF"/>
-    <img src="https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=2rami&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=6C63FF" height="170" alt="Top Languages"/>
-  </picture>
+  <img src="https://github-readme-stats-sigma-five.vercel.app/api?username=2rami&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=6C63FF&icon_color=6C63FF" height="170" alt="GitHub Stats"/>
+  <img src="https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=2rami&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=6C63FF" height="170" alt="Top Languages"/>
 </div>
 
 <div align="center">
   <img src="https://streak-stats.demolab.com?user=2rami&theme=tokyonight&hide_border=true&background=0D1117&ring=6C63FF&fire=6C63FF&currStreakLabel=6C63FF" alt="GitHub Streak"/>
+</div>
+
+---
+
+## 3D Contribution
+
+<div align="center">
+  <img src="./profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution"/>
 </div>
 
 ---
@@ -94,14 +85,6 @@ interests:
 
 ---
 
-## Contribution Snake
-
-<div align="center">
-  <img src="https://raw.githubusercontent.com/2rami/2rami/output/github-contribution-grid-snake-dark.svg" alt="Snake animation"/>
-</div>
-
----
-
 ## Connect
 
 <div align="center">
@@ -112,8 +95,5 @@ interests:
   <sub>Discord: @omufrozen | GitHub: 2rami</sub>
 </div>
 
----
-
-<div align="center">
-  <i>Designer who builds with AI assistance</i>
-</div>
+<!-- Footer with Capsule Render -->
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=120&section=footer" width="100%"/>
