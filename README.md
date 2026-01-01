@@ -52,11 +52,9 @@ interests:
 ![Discord.py](https://img.shields.io/badge/Discord.py-5865F2?style=flat-square&logo=discord&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
 ![Claude](https://img.shields.io/badge/Claude-D4A27F?style=flat-square&logo=anthropic&logoColor=white)
-![ChatGPT](https://img.shields.io/badge/ChatGPT-74AA9C?style=flat-square&logo=openai&logoColor=white)
-![GitHub Copilot](https://img.shields.io/badge/Copilot-000000?style=flat-square&logo=githubcopilot&logoColor=white)
 
 ### Design & Tools
-<img src="https://skillicons.dev/icons?i=figma,ps,ai,xd,git,github,vscode" />
+<img src="https://skillicons.dev/icons?i=figma,ps,ai,ae,git,github,vscode" />
 
 </div>
 
