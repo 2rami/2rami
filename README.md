@@ -6,11 +6,9 @@
     <img src="./assets/icons/user-dark.svg" alt="user" width="64"/>
   </picture>
   <br/><br/>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/text/header-light.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/text/header-dark.svg">
-    <img src="./assets/text/header-dark.svg" alt="2rami" height="50"/>
-  </picture>
+  <a href="https://git.io/typing-svg">
+    <img src="https://readme-typing-svg.demolab.com?font=Pixelify+Sans&weight=700&size=40&pause=9999999&color=58A6FF&center=true&vCenter=true&repeat=false&width=200&height=50&lines=2rami" alt="2rami"/>
+  </a>
   <br/>
   <sub>Designer + AI-Assisted Developer</sub>
 </div>
@@ -39,11 +37,7 @@
 <br/>
 
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/text/about-me-light.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/text/about-me-dark.svg">
-    <img src="./assets/text/about-me-dark.svg" alt="About Me" height="40"/>
-  </picture>
+  <img src="https://readme-typing-svg.demolab.com?font=Pixelify+Sans&weight=700&size=28&pause=9999999&color=58A6FF&center=true&vCenter=true&repeat=false&width=180&height=40&lines=About+Me" alt="About Me"/>
 </div>
 
 ```
@@ -84,11 +78,7 @@
 <br/>
 
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/text/tech-stack-light.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/text/tech-stack-dark.svg">
-    <img src="./assets/text/tech-stack-dark.svg" alt="Tech Stack" height="40"/>
-  </picture>
+  <img src="https://readme-typing-svg.demolab.com?font=Pixelify+Sans&weight=700&size=28&pause=9999999&color=58A6FF&center=true&vCenter=true&repeat=false&width=200&height=40&lines=Tech+Stack" alt="Tech Stack"/>
 </div>
 
 <div align="center">
@@ -209,11 +199,7 @@
 </div>
 
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/text/github-stats-light.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/text/github-stats-dark.svg">
-    <img src="./assets/text/github-stats-dark.svg" alt="GitHub Stats" height="40"/>
-  </picture>
+  <img src="https://readme-typing-svg.demolab.com?font=Pixelify+Sans&weight=700&size=28&pause=9999999&color=58A6FF&center=true&vCenter=true&repeat=false&width=220&height=40&lines=GitHub+Stats" alt="GitHub Stats"/>
 </div>
 
 <div align="center">
@@ -245,11 +231,7 @@
 <br/>
 
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/text/contribution-light.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/text/contribution-dark.svg">
-    <img src="./assets/text/contribution-dark.svg" alt="Contribution" height="40"/>
-  </picture>
+  <img src="https://readme-typing-svg.demolab.com?font=Pixelify+Sans&weight=700&size=28&pause=9999999&color=58A6FF&center=true&vCenter=true&repeat=false&width=220&height=40&lines=Contribution" alt="Contribution"/>
 </div>
 
 <div align="center">
@@ -280,11 +262,7 @@
 <br/>
 
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/text/featured-project-light.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/text/featured-project-dark.svg">
-    <img src="./assets/text/featured-project-dark.svg" alt="Featured Project" height="40"/>
-  </picture>
+  <img src="https://readme-typing-svg.demolab.com?font=Pixelify+Sans&weight=700&size=28&pause=9999999&color=58A6FF&center=true&vCenter=true&repeat=false&width=280&height=40&lines=Featured+Project" alt="Featured Project"/>
 </div>
 
 <div align="center">
@@ -317,11 +295,7 @@
 <br/>
 
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/text/connect-light.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/text/connect-dark.svg">
-    <img src="./assets/text/connect-dark.svg" alt="Connect" height="40"/>
-  </picture>
+  <img src="https://readme-typing-svg.demolab.com?font=Pixelify+Sans&weight=700&size=28&pause=9999999&color=58A6FF&center=true&vCenter=true&repeat=false&width=160&height=40&lines=Connect" alt="Connect"/>
 </div>
 
 <div align="center">
