@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="40">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@700&amp;display=swap');
+    </style>
+  </defs>
+  <text x="50%" y="30" text-anchor="middle" font-family="'Pixelify Sans', monospace" font-size="28" font-weight="700" fill="#000000">GitHub Stats</text>
+</svg>

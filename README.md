@@ -5,7 +5,13 @@
     <source media="(prefers-color-scheme: light)" srcset="./assets/icons/user-dark.svg">
     <img src="./assets/icons/user-dark.svg" alt="user" width="64"/>
   </picture>
-  <h1>2rami</h1>
+  <br/><br/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/text/header-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/text/header-dark.svg">
+    <img src="./assets/text/header-dark.svg" alt="2rami" height="50"/>
+  </picture>
+  <br/>
   <sub>Designer + AI-Assisted Developer</sub>
 </div>
 
@@ -32,7 +38,13 @@
 
 <br/>
 
-## About Me
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/text/about-me-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/text/about-me-dark.svg">
+    <img src="./assets/text/about-me-dark.svg" alt="About Me" height="40"/>
+  </picture>
+</div>
 
 ```
 +----------------------------------+
@@ -71,7 +83,13 @@
 
 <br/>
 
-## Tech Stack
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/text/tech-stack-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/text/tech-stack-dark.svg">
+    <img src="./assets/text/tech-stack-dark.svg" alt="Tech Stack" height="40"/>
+  </picture>
+</div>
 
 <div align="center">
 
@@ -190,7 +208,13 @@
   </picture>
 </div>
 
-## GitHub Stats
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/text/github-stats-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/text/github-stats-dark.svg">
+    <img src="./assets/text/github-stats-dark.svg" alt="GitHub Stats" height="40"/>
+  </picture>
+</div>
 
 <div align="center">
   <img src="https://github-readme-stats-sigma-five.vercel.app/api?username=2rami&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=6C63FF&icon_color=6C63FF" height="170" alt="GitHub Stats"/>
@@ -220,7 +244,13 @@
 
 <br/>
 
-## Contribution
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/text/contribution-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/text/contribution-dark.svg">
+    <img src="./assets/text/contribution-dark.svg" alt="Contribution" height="40"/>
+  </picture>
+</div>
 
 <div align="center">
   <img src="./profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution"/>
@@ -249,7 +279,13 @@
 
 <br/>
 
-## Featured Project
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/text/featured-project-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/text/featured-project-dark.svg">
+    <img src="./assets/text/featured-project-dark.svg" alt="Featured Project" height="40"/>
+  </picture>
+</div>
 
 <div align="center">
   <a href="https://github.com/2rami/debi-marlene">
@@ -280,7 +316,13 @@
 
 <br/>
 
-## Connect
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/text/connect-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/text/connect-dark.svg">
+    <img src="./assets/text/connect-dark.svg" alt="Connect" height="40"/>
+  </picture>
+</div>
 
 <div align="center">
   <picture>
