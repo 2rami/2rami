@@ -55,11 +55,8 @@ interests:
 ![ChatGPT](https://img.shields.io/badge/ChatGPT-74AA9C?style=flat-square&logo=openai&logoColor=white)
 ![GitHub Copilot](https://img.shields.io/badge/Copilot-000000?style=flat-square&logo=githubcopilot&logoColor=white)
 
-### Design
-<img src="https://skillicons.dev/icons?i=figma,ps,ai,xd" />
-
-### Tools
-<img src="https://skillicons.dev/icons?i=git,github,vscode" />
+### Design & Tools
+<img src="https://skillicons.dev/icons?i=figma,ps,ai,xd,git,github,vscode" />
 
 </div>
 
@@ -72,7 +69,7 @@ interests:
 </div>
 
 <div align="center">
-  <img src="https://pixel-profile.vercel.app/api/github-stats?username=2rami&theme=road_trip&screen_effect=true" alt="GitHub Stats"/>
+  <img src="https://pixel-profile.vercel.app/api/github-stats?username=2rami&theme=monica&screen_effect=true" alt="GitHub Stats"/>
 </div>
 
 <br/>
