@@ -40,18 +40,15 @@
   <img src="https://readme-typing-svg.demolab.com?font=Pixelify+Sans&weight=700&size=28&pause=9999999&color=58A6FF&center=true&vCenter=true&repeat=false&width=180&height=40&lines=About+Me" alt="About Me"/>
 </div>
 
-```
-+----------------------------------+
-|  name: 2rami                     |
-|  location: South Korea           |
-|  background: Design Student      |
-|  focus: AI-Assisted Development  |
-+----------------------------------+
-|  interests:                      |
-|    > Discord Bot Development     |
-|    > Automation Scripts          |
-|    > Game Development            |
-+----------------------------------+
+```yaml
+name: 2rami
+location: South Korea
+background: Design Student
+current_focus: AI-Assisted Development
+interests:
+  - Discord Bot Development
+  - Automation Scripts
+  - Game Development
 ```
 
 <br/>
@@ -168,9 +165,9 @@
   <img src="./assets/icons/git-merge-dark.svg" alt="github" width="48"/>
 </picture>
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/code-light.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/code-dark.svg">
-  <img src="./assets/icons/code-dark.svg" alt="vscode" width="48"/>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/device-laptop-light.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/device-laptop-dark.svg">
+  <img src="./assets/icons/device-laptop-dark.svg" alt="vscode" width="48"/>
 </picture>
 <br/>
 <sub>Git | GitHub | VSCode</sub>
@@ -203,8 +200,7 @@
 </div>
 
 <div align="center">
-  <img src="https://github-readme-stats-sigma-five.vercel.app/api?username=2rami&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=6C63FF&icon_color=6C63FF" height="170" alt="GitHub Stats"/>
-  <img src="https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=2rami&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=6C63FF" height="170" alt="Top Languages"/>
+  <img src="https://pixel-profile.vercel.app/api/github-stats?username=2rami&theme=road_trip&screen_effect=true" alt="GitHub Stats"/>
 </div>
 
 <br/>
@@ -300,14 +296,14 @@
 
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/message-light.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/message-dark.svg">
-    <img src="./assets/icons/message-dark.svg" alt="discord" width="48"/>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/gamepad-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/gamepad-dark.svg">
+    <img src="./assets/icons/gamepad-dark.svg" alt="discord" width="48"/>
   </picture>
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/git-branch-light.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/git-branch-dark.svg">
-    <img src="./assets/icons/git-branch-dark.svg" alt="github" width="48"/>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/git-merge-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/git-merge-dark.svg">
+    <img src="./assets/icons/git-merge-dark.svg" alt="github" width="48"/>
   </picture>
   <br/>
   <sub>Discord: @omufrozen | GitHub: 2rami</sub>
