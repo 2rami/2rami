@@ -81,96 +81,26 @@ interests:
 <div align="center">
 
 ### Development
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/code-light.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/code-dark.svg">
-  <img src="./assets/icons/code-dark.svg" alt="code" width="48"/>
-</picture>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/script-light.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/script-dark.svg">
-  <img src="./assets/icons/script-dark.svg" alt="script" width="48"/>
-</picture>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/message-processing-light.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/message-processing-dark.svg">
-  <img src="./assets/icons/message-processing-dark.svg" alt="bot" width="48"/>
-</picture>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/server-light.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/server-dark.svg">
-  <img src="./assets/icons/server-dark.svg" alt="api" width="48"/>
-</picture>
-<br/>
-<sub>Python | JavaScript | Discord.py | FastAPI</sub>
-
-<br/><br/>
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Discord.py](https://img.shields.io/badge/Discord.py-5865F2?style=flat-square&logo=discord&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
 
 ### AI Tools
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chat-light.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chat-dark.svg">
-  <img src="./assets/icons/chat-dark.svg" alt="claude" width="48"/>
-</picture>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/message-processing-light.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/message-processing-dark.svg">
-  <img src="./assets/icons/message-processing-dark.svg" alt="chatgpt" width="48"/>
-</picture>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/zap-light.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/zap-dark.svg">
-  <img src="./assets/icons/zap-dark.svg" alt="copilot" width="48"/>
-</picture>
-<br/>
-<sub>Claude | ChatGPT | GitHub Copilot</sub>
-
-<br/><br/>
+![Claude](https://img.shields.io/badge/Claude-D4A27F?style=flat-square&logo=anthropic&logoColor=white)
+![ChatGPT](https://img.shields.io/badge/ChatGPT-74AA9C?style=flat-square&logo=openai&logoColor=white)
+![GitHub Copilot](https://img.shields.io/badge/Copilot-000000?style=flat-square&logo=githubcopilot&logoColor=white)
 
 ### Design
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/paint-bucket-light.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/paint-bucket-dark.svg">
-  <img src="./assets/icons/paint-bucket-dark.svg" alt="figma" width="48"/>
-</picture>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/image-light.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/image-dark.svg">
-  <img src="./assets/icons/image-dark.svg" alt="photoshop" width="48"/>
-</picture>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/edit-box-light.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/edit-box-dark.svg">
-  <img src="./assets/icons/edit-box-dark.svg" alt="illustrator" width="48"/>
-</picture>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/layout-light.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/layout-dark.svg">
-  <img src="./assets/icons/layout-dark.svg" alt="xd" width="48"/>
-</picture>
-<br/>
-<sub>Figma | Photoshop | Illustrator | Adobe XD</sub>
-
-<br/><br/>
+![Figma](https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=figma&logoColor=white)
+![Photoshop](https://img.shields.io/badge/Photoshop-31A8FF?style=flat-square&logo=adobephotoshop&logoColor=white)
+![Illustrator](https://img.shields.io/badge/Illustrator-FF9A00?style=flat-square&logo=adobeillustrator&logoColor=white)
+![Adobe XD](https://img.shields.io/badge/XD-FF61F6?style=flat-square&logo=adobexd&logoColor=white)
 
 ### Tools
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/git-branch-light.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/git-branch-dark.svg">
-  <img src="./assets/icons/git-branch-dark.svg" alt="git" width="48"/>
-</picture>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/git-merge-light.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/git-merge-dark.svg">
-  <img src="./assets/icons/git-merge-dark.svg" alt="github" width="48"/>
-</picture>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/device-laptop-light.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/icons/device-laptop-dark.svg">
-  <img src="./assets/icons/device-laptop-dark.svg" alt="vscode" width="48"/>
-</picture>
-<br/>
-<sub>Git | GitHub | VSCode</sub>
+![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)
+![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=flat-square&logo=visualstudiocode&logoColor=white)
 
 </div>
 
@@ -231,7 +161,7 @@ interests:
 </div>
 
 <div align="center">
-  <img src="./profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution"/>
+  <img src="https://raw.githubusercontent.com/2rami/2rami/output/github-contribution-grid-snake-dark.svg" alt="Snake Contribution"/>
 </div>
 
 <br/>
@@ -263,7 +193,7 @@ interests:
 
 <div align="center">
   <a href="https://github.com/2rami/debi-marlene">
-    <img src="https://github-readme-stats-sigma-five.vercel.app/api/pin/?username=2rami&repo=debi-marlene&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=6C63FF&icon_color=6C63FF" alt="debi-marlene"/>
+    <img src="https://github-readme-stats-sigma-five.vercel.app/api/pin/?username=2rami&repo=debi-marlene&theme=react&hide_border=true" alt="debi-marlene"/>
   </a>
 </div>
 
@@ -295,18 +225,10 @@ interests:
 </div>
 
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/gamepad-light.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/gamepad-dark.svg">
-    <img src="./assets/icons/gamepad-dark.svg" alt="discord" width="48"/>
-  </picture>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/git-merge-light.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/git-merge-dark.svg">
-    <img src="./assets/icons/git-merge-dark.svg" alt="github" width="48"/>
-  </picture>
-  <br/>
-  <sub>Discord: @omufrozen | GitHub: 2rami</sub>
+
+[![Discord](https://img.shields.io/badge/@omufrozen-5865F2?style=flat-square&logo=discord&logoColor=white)](https://discord.com)
+[![GitHub](https://img.shields.io/badge/2rami-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/2rami)
+
 </div>
 
 <br/>
