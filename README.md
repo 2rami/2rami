@@ -123,24 +123,3 @@ interests:
 [![GitHub](https://img.shields.io/badge/2rami-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/2rami)
 
 </div>
-
-<br/>
-
-<!-- Pixel Footer -->
-<div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevron-down-light.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevron-down-dark.svg">
-    <img src="./assets/icons/chevron-down-dark.svg" alt="footer" width="32"/>
-  </picture>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/heart-light.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/heart-dark.svg">
-    <img src="./assets/icons/heart-dark.svg" alt="heart" width="32"/>
-  </picture>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/icons/chevron-down-light.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/icons/chevron-down-dark.svg">
-    <img src="./assets/icons/chevron-down-dark.svg" alt="footer" width="32"/>
-  </picture>
-</div>
