@@ -67,7 +67,7 @@ interests:
 </div>
 
 <div align="center">
-  <img src="https://pixel-profile.vercel.app/api/github-stats?username=2rami&theme=monica&screen_effect=true" alt="GitHub Stats"/>
+  <img src="https://pixel-profile.vercel.app/api/github-stats?username=2rami&theme=monica" alt="GitHub Stats"/>
 </div>
 
 <br/>
