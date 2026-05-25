@@ -77,6 +77,20 @@ interests:
 <br/>
 
 <div align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Pixelify+Sans&weight=700&size=28&pause=9999999&color=58A6FF&center=true&vCenter=true&repeat=false&width=160&height=40&lines=Streak" alt="Streak"/>
+</div>
+
+<div align="center">
+  <img src="https://streak-stats.demolab.com?user=2rami&hide_border=true&background=00000000&ring=58A6FF&fire=58A6FF&currStreakLabel=58A6FF&currStreakNum=C9D1D9&sideLabels=C9D1D9&sideNums=C9D1D9&dates=8B949E&stroke=58A6FF" alt="GitHub Streak"/>
+</div>
+
+<br/>
+
+---
+
+<br/>
+
+<div align="center">
   <img src="https://readme-typing-svg.demolab.com?font=Pixelify+Sans&weight=700&size=28&pause=9999999&color=58A6FF&center=true&vCenter=true&repeat=false&width=220&height=40&lines=Contribution" alt="Contribution"/>
 </div>
 
@@ -107,12 +121,42 @@ interests:
 <br/>
 
 <div align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Pixelify+Sans&weight=700&size=28&pause=9999999&color=58A6FF&center=true&vCenter=true&repeat=false&width=360&height=40&lines=Currently+Working+On" alt="Currently Working On"/>
+</div>
+
+<div align="center">
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="https://img.shields.io/badge/kasaterm-58A6FF?style=for-the-badge&logo=rust&logoColor=white" alt="kasaterm"/>
+      <br/>
+      <sub>Rust GPU terminal built from scratch (wgpu + sugarloaf)</sub>
+    </td>
+    <td align="center" width="50%">
+      <a href="https://github.com/2rami/debi-marlene">
+        <img src="https://img.shields.io/badge/debi--marlene-58A6FF?style=for-the-badge&logo=discord&logoColor=white" alt="debi-marlene"/>
+      </a>
+      <br/>
+      <sub>AI voice / TTS pipeline for a Discord bot</sub>
+    </td>
+  </tr>
+</table>
+</div>
+
+<br/>
+
+---
+
+<br/>
+
+<div align="center">
   <img src="https://readme-typing-svg.demolab.com?font=Pixelify+Sans&weight=700&size=28&pause=9999999&color=58A6FF&center=true&vCenter=true&repeat=false&width=160&height=40&lines=Connect" alt="Connect"/>
 </div>
 
 <div align="center">
 
 [![Discord](https://img.shields.io/badge/@omufrozen-5865F2?style=flat-square&logo=discord&logoColor=white)](https://discord.com)
+[![Email](https://img.shields.io/badge/goenho0613@gmail.com-EA4335?style=flat-square&logo=gmail&logoColor=white)](mailto:goenho0613@gmail.com)
 [![GitHub](https://img.shields.io/badge/2rami-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/2rami)
 
 </div>
