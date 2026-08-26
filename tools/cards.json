@@ -1,0 +1,14 @@
+[
+  {"name":"kasaterm","icon":"device-laptop","lang":"Rust","stars":10,
+   "desc":"GPU terminal built from scratch with wgpu and sugarloaf"},
+  {"name":"debi-marlene","icon":"gamepad","lang":"Python","stars":4,
+   "desc":"Discord bot for Eternal Return with AI voice and TTS"},
+  {"name":"nacho-neko","icon":"server","lang":"Python","stars":0,
+   "desc":"Slack agent that watches channels and reports what matters"},
+  {"name":"now-there","icon":"layout","lang":"Dart","stars":0,
+   "desc":"Crowdsourced app for sharing how a place feels right now"},
+  {"name":"claude-code-simple-statusline","icon":"command","lang":"Python","stars":1,
+   "desc":"A minimal, beautiful statusline for Claude Code CLI"},
+  {"name":"ai-trending-feed","icon":"zap","lang":"Python","stars":0,
+   "desc":"Daily AI trend curation delivered to Discord at 09:00 KST"}
+]
