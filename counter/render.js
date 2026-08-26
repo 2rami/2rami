@@ -7,47 +7,52 @@
 // 그림을 data URI 로 박는 이유는 GitHub 때문이다. SVG 를 <img> 로 걸면 바깥
 // 파일 참조가 막히지만 같은 문서 안의 data URI 는 그대로 그려진다.
 //
-// 자릿수는 캐릭터가 **손에 든 카드** 위에 적힌다 (moe-counter 의 original 테마를
-// 패러디한 것 — 거기서도 캐릭터가 번호판을 몸 앞에 들고 있다). 카드는 벡터로
-// 그려 캐릭터 위에 얹는다. 그림 자체는 포즈가 고정돼 있어 손 모양을 바꿀 수
-// 없으므로, 카드 양옆에 그 캐릭터의 살색으로 손을 하나씩 붙여 쥔 것처럼 보이게
-// 한다. 살색은 생성기가 얼굴에서 뽑아 sprites.json 에 적어 둔다.
+// 자릿수는 캐릭터가 손에 든 카드 위에 적힌다. 카드는 **그림에 같이 그려져
+// 있다** — 전에는 벡터로 얹고 양옆에 살색 네모를 붙여 손인 척했는데, 캐릭터가
+// 실제로 카드를 쥔 그림을 새로 뽑았으므로 그럴 필요가 없어졌다. 카드가 어디
+// 있는지는 생성기가 재서 sprites.json 에 적어 둔다.
 //
-// 한 칸은 동작 한 벌(4~6프레임)이 도는 애니메이션이다. 프레임은 가로 띠 한 장에
-// 이어 붙여 두고 창문을 고정한 채 띠를 옆으로 민다. 같은 자릿수가 두 번 나와도
-// 그림은 <defs> 에 한 번만 박고 <use> 로 부른다 — 안 그러면 base64 가 통째로
-// 두 번 들어간다.
+// 칸 폭은 캐릭터마다 다르다. 제일 넓은 캐릭터에 맞춰 고정하면 좁은 캐릭터
+// 양옆이 휑하게 비어 한 명씩 상자에 갇힌 것처럼 보인다. 원본도 캐릭터를 제
+// 폭 그대로 붙여 세운다.
 //
-// 동작이 작은 칸은 위아래로 띄운다(sprites.json 의 bob). 생성기가 실루엣으로
-// 재 둔 값이고, 팔다리가 거의 안 움직이는 동작은 프레임이 넘어가도 멈춘 것처럼
-// 보이기 때문이다. 띄우는 것도 정수 px 다 — 반 픽셀로 흐르면 도트가 번진다.
+// 한 칸은 세 프레임이다(기본·눈감기·미소). 프레임은 가로 띠 한 장에 이어 붙여
+// 두고 창문을 고정한 채 띠를 옆으로 민다. 같은 자릿수가 두 번 나와도 그림은
+// <defs> 에 한 번만 박고 <use> 로 부른다 — 안 그러면 base64 가 통째로 두 번
+// 들어간다.
+//
+// 프레임 간격은 고르지 않다. 눈은 오래 뜨고 있다가 잠깐 감는 것이라 steps(3)
+// 으로 균등하게 돌리면 계속 껌뻑이는 인형이 된다. 그래서 키프레임 위치를
+// 직접 잡고 step-end 로 끊는다 — 구간마다 값이 그대로 유지된다.
 
 import sprites from "./sprites.json" with { type: "json" };
 
 const PAL = {
-  light: { sky0: "#e8f4fb", sky1: "#c8e6f7", ground: "#b8dcf0", lbl: "#5d7f95", cloud: "#ffffff", cop: .8,
-           plate: "#ffffff", pedge: "#7fa9c2", pnum: "#14303f" },
-  dark: { sky0: "#14202c", sky1: "#1d3a52", ground: "#2a4a63", lbl: "#8badc4", cloud: "#243849", cop: .55,
-          plate: "#e4eef5", pedge: "#4d7086", pnum: "#12293a" },
+  light: { sky0: "#e8f4fb", sky1: "#c8e6f7", ground: "#b8dcf0", lbl: "#5d7f95",
+           cloud: "#ffffff", cop: .8 },
+  dark: { sky0: "#14202c", sky1: "#1d3a52", ground: "#2a4a63", lbl: "#8badc4",
+          cloud: "#243849", cop: .55 },
 };
 
-const CELL = 70;          // 칸 폭 — 제일 넓은 동작(스파키 도발 67px)이 들어간다
 const GAP = 2;
-const PAD = 10;
-const TOP = 6;            // 카드 위변과 제일 큰 캐릭터 머리 사이
-const GROUND = 7;         // 발밑 바닥 띠 두께
-const BOT = 5;            // 바닥 띠와 칸 아래변 사이 — 없으면 발이 테두리에 닿는다
-const PLATE_W = 34;       // 캐릭터가 든 카드
-const PLATE_H = 28;
+const PAD = 8;
+const TOP = 3;            // 캐릭터 머리와 칸 위변 사이
+const GROUND = 6;         // 발밑 바닥 띠 두께
+const BOT = 3;
 const PDOT = 3;           // 카드 위 숫자의 도트 한 칸
 const DW = 5, DH = 7;     // 숫자 도트 격자
 const LBL = 9;
+const INK = "#12293a";    // 카드는 그림에 흰색으로 박혀 있어 명암 모드와 무관하다
 const H_CHAR = sprites.h;
 const CELL_H = TOP + H_CHAR + GROUND + BOT;
 
+// 프레임 순서와 머무는 시간(ms). 0 기본 · 1 눈감기 · 2 미소.
+const SEQ = [0, 1, 0, 2];
+const DUR = [900, 140, 900, 420];
+const CYCLE = DUR.reduce((a, b) => a + b, 0);
+
 // 자릿수는 5x7 도트로 직접 그린다. Pixelify Sans 의 5 는 윗변이 말려 8·S 와
-// 안 갈린다 — 굵기를 바꿔도 같아서 글자 대신 도트를 찍는다. 카드 위 숫자가
-// 이제 칸의 주인공이라 3x5 로는 가늘어서 격자를 키웠다.
+// 안 갈린다 — 굵기를 바꿔도 같아서 글자 대신 도트를 찍는다.
 const DIGITS = [
   "01110" + "10001" + "10011" + "10101" + "11001" + "10001" + "01110",
   "00100" + "01100" + "00100" + "00100" + "00100" + "00100" + "01110",
@@ -84,7 +89,8 @@ function digit(ch, x, y) {
 export function render(count, label = "visitors") {
   const s = String(Math.max(0, Math.floor(count)));
   const n = s.length;
-  const W = PAD * 2 + n * CELL + (n - 1) * GAP;
+  const cells = [...s].map((c) => sprites.slots[Number(c)]);
+  const W = PAD * 2 + cells.reduce((a, sl) => a + sl.w, 0) + (n - 1) * GAP;
   const H = PAD * 2 + CELL_H + (label ? LBL + 5 : 0);
 
   const css = [];
@@ -93,15 +99,12 @@ export function render(count, label = "visitors") {
     const end = mode === "light" ? "" : "}";
     css.push(
       `${open}.sky0{stop-color:${p.sky0}}.sky1{stop-color:${p.sky1}}` +
-        `.gnd{fill:${p.ground}}` +
-        `.lbl{fill:${p.lbl}}.plate{fill:${p.plate};stroke:${p.pedge}}` +
-        `.pnum{fill:${p.pnum}}` +
+        `.gnd{fill:${p.ground}}.lbl{fill:${p.lbl}}` +
         `.cloud{fill:${p.cloud};opacity:${p.cop}}${end}`
     );
   }
 
-  // 쓰인 자릿수만 <defs> 에 굽는다. 띠를 한 칸씩 미는 것이 곧 프레임 넘김이라
-  // steps(n) 으로 끊는다 — 중간값이 보이면 두 프레임이 겹쳐 흐려진다.
+  // 쓰인 자릿수만 <defs> 에 굽는다.
   const used = [...new Set(s)].map(Number).sort();
   const defs = [];
   for (const d of used) {
@@ -110,23 +113,18 @@ export function render(count, label = "visitors") {
       `<image id="c${d}" width="${sl.w * sl.n}" height="${sl.h}" ` +
         `href="data:image/png;base64,${sl.png}"/>`
     );
-    css.push(`@keyframes k${d}{from{transform:translateX(0)}to{transform:translateX(${-sl.w * sl.n}px)}}`);
-    css.push(`.a${d}{animation:k${d} ${((sl.n * sl.dur) / 1000).toFixed(2)}s steps(${sl.n}) infinite}`);
-  }
-  // 쓰인 부유 세기만 굽는다. 오르내리는 중간값이 보이면 도트가 흐려지므로
-  // steps(1) 로 칸마다 딱 끊는다 — 키프레임이 여럿이라 구간마다 값이 바뀐다.
-  const bobs = [...new Set(used.map((d) => sprites.slots[d].bob || 0))].filter(Boolean);
-  for (const b of bobs) {
-    const seq = b === 1 ? [0, -1] : [0, -1, -2, -1];
-    const kf = seq
-      .map((v, i) => `${((i / seq.length) * 100).toFixed(0)}%{transform:translateY(${v}px)}`)
-      .join("");
-    css.push(`@keyframes b${b}{${kf}}`);
-    css.push(`.b${b}{animation:b${b} ${b === 1 ? "2.2" : "2.8"}s steps(1) infinite}`);
+    let t = 0;
+    const kf = SEQ.map((f, i) => {
+      const at = ((t / CYCLE) * 100).toFixed(2);
+      t += DUR[i];
+      return `${at}%{transform:translateX(${-f * sl.w}px)}`;
+    }).join("");
+    css.push(`@keyframes k${d}{${kf}}`);
+    css.push(`.a${d}{animation:k${d} ${(CYCLE / 1000).toFixed(2)}s step-end infinite}`);
   }
   css.push(`.drift{animation:d 22s linear infinite}`);
   css.push(`@keyframes d{from{transform:translateX(${-Math.round(W * 0.5)}px)}to{transform:translateX(${W}px)}}`);
-  css.push(`@media (prefers-reduced-motion:reduce){[class^=a],[class^=b],.drift{animation:none}}`);
+  css.push(`@media (prefers-reduced-motion:reduce){[class^=a],.drift{animation:none}}`);
   css.push(`image{image-rendering:pixelated}`);
 
   const parts = [
@@ -157,42 +155,27 @@ export function render(count, label = "visitors") {
       `width="${W - PAD * 2}" height="3" rx="1.5"/>`
   );
 
+  let x = PAD;
   for (let i = 0; i < n; i++) {
     const d = Number(s[i]);
-    const sl = sprites.slots[d];
-    const x = PAD + i * (CELL + GAP);
-    const y = PAD;
-    // 키가 제각각이라 발을 바닥에 맞춘다. 위로 남는 자리는 그냥 여백이 된다.
-    const cx = x + Math.round((CELL - sl.w) / 2);
-    const cy = y + TOP + (H_CHAR - sl.h);
-    const delay = ((i * 137) % 700) / 1000;   // 열이 한꺼번에 움직이면 기계처럼 보인다
-    const cell =
-      `<svg x="${cx}" y="${cy}" width="${sl.w}" height="${sl.h}" ` +
-      `viewBox="0 0 ${sl.w} ${sl.h}">` +
-      `<g class="a${d}" style="animation-delay:${delay}s"><use href="#c${d}"/></g></svg>`;
-
-    // 든 카드 — 몸통 앞. 손은 카드 밑으로 3px 들어가 있어 쥔 것처럼 보인다.
-    const px = x + Math.round((CELL - PLATE_W) / 2);
-    const py = cy + Math.round(sl.h * 0.56) - Math.round(PLATE_H / 2);
-    const hy = py + Math.round(PLATE_H * 0.34);
-    const skin = sl.skin || "#f4e6e1";
-    const plate =
-      `<rect x="${px + 1}" y="${py + 2}" width="${PLATE_W}" height="${PLATE_H}" rx="2" ` +
-        `fill="#000" fill-opacity=".16"/>` +
-      `<g fill="${skin}"><rect x="${px - 5}" y="${hy}" width="9" height="9" rx="2.5"/>` +
-        `<rect x="${px + PLATE_W - 4}" y="${hy}" width="9" height="9" rx="2.5"/></g>` +
-      `<rect class="plate" x="${px + 0.5}" y="${py + 0.5}" width="${PLATE_W - 1}" ` +
-        `height="${PLATE_H - 1}" rx="2" stroke-width="1"/>` +
-      `<g class="pnum">${digit(s[i], px + Math.round((PLATE_W - DW * PDOT) / 2),
-        py + Math.round((PLATE_H - DH * PDOT) / 2))}</g>`;
-
-    const bob = sl.bob || 0;
-    const body = cell + plate;    // 카드는 캐릭터가 든 것이라 같이 떠야 한다
+    const sl = cells[i];
+    const cy = PAD + TOP + (H_CHAR - sl.h);   // 키가 달라도 발은 바닥에 맞춘다
+    // 열이 한꺼번에 깜빡이면 기계처럼 보인다. 음수로 밀어 첫 화면부터 어긋나게.
+    const delay = -((i * 613) % CYCLE) / 1000;
     parts.push(
-      bob
-        ? `<g class="b${bob}" style="animation-delay:${(delay / 2).toFixed(3)}s">${body}</g>`
-        : body
+      `<svg x="${x}" y="${cy}" width="${sl.w}" height="${sl.h}" ` +
+      `viewBox="0 0 ${sl.w} ${sl.h}">` +
+      `<g class="a${d}" style="animation-delay:${delay.toFixed(3)}s"><use href="#c${d}"/></g></svg>`
     );
+
+    // 숫자는 그림 속 카드 자리에 그대로 찍는다
+    const [kx, ky, kw, kh] = sl.card;
+    parts.push(
+      `<g fill="${INK}">${digit(s[i],
+        x + kx + Math.round((kw - DW * PDOT) / 2),
+        cy + ky + Math.round((kh - DH * PDOT) / 2))}</g>`
+    );
+    x += sl.w + GAP;
   }
 
   if (label) {
