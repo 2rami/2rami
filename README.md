@@ -64,7 +64,7 @@
 
 ---
 
-<img src="https://count.getloli.com/get/@2rami?theme=moebooru" width="846" alt="visitor counter"/>
+<img src="./assets/counter.svg" alt="visitor counter" height="172"/>
 
 <!-- ═══════════════ CONNECT ═══════════════ -->
 <picture>
