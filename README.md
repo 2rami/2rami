@@ -48,7 +48,7 @@
 
 ### &nbsp;Tech Stack
 
-<img src="https://skillicons.dev/icons?i=rust,python,ts,flutter,figma,ps,ae,git&perline=8" alt="Rust, Python, TypeScript, Flutter, Figma, Photoshop, After Effects, Git"/>
+<img src="./assets/stack.svg" width="568" alt="Rust, Python, TypeScript, Flutter, Figma, Photoshop, After Effects, Git"/>
 
 ---
 
@@ -74,6 +74,6 @@
 
 ### &nbsp;Connect
 
-<a href="https://discord.com/users/omufrozen"><img src="https://img.shields.io/badge/@omufrozen-5865F2?style=flat-square&logo=discord&logoColor=white" alt="Discord"/></a>
-<a href="mailto:goenho0613@gmail.com"><img src="https://img.shields.io/badge/goenho0613@gmail.com-EA4335?style=flat-square&logo=gmail&logoColor=white" alt="Email"/></a>
-<a href="https://github.com/2rami"><img src="https://img.shields.io/badge/2rami-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"/></a>
+<a href="https://discord.com/users/omufrozen"><img src="./assets/connect-discord.svg" height="44" alt="Discord @omufrozen"/></a>
+<a href="mailto:goenho0613@gmail.com"><img src="./assets/connect-mail.svg" height="44" alt="goenho0613@gmail.com"/></a>
+<a href="https://github.com/2rami"><img src="./assets/connect-github.svg" height="44" alt="GitHub 2rami"/></a>
