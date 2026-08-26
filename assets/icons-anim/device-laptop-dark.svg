@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><style>.a{animation:m 1.4s steps(1) infinite;transform-origin:center}@keyframes m{0%,50%{transform:translateY(0)}50.01%,100%{transform:translateY(1px)}}@media (prefers-reduced-motion:reduce){.a{animation:none}}</style><path class="a" d="M6 4H4v12h16V4H6zm12 2v8H6V6h12zm4 12H2v2h20v-2z" fill="#000"/></svg>
