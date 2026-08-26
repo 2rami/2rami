@@ -28,16 +28,17 @@ LINES = [
     ("> ", "games  agents", "out"),
 ]
 
+# 팔레트는 히어로 그림에서 뽑은 값 — 카드(make_cards)와 같은 값을 쓴다.
 STYLE = f"""
-  .win{{fill:#ffffff;stroke:#d0d7de}}
-  .bar{{fill:#f6f8fa}}
-  .cmd{{fill:#1f2328}} .out{{fill:#6e7781}} .tit{{fill:#8b949e}}
-  .cur{{fill:#0969da}} .pr{{fill:#0969da}}
+  .win{{fill:#f4fafe;stroke:#bcdcef}}
+  .bar{{fill:#e3f1fb}}
+  .cmd{{fill:#2b4257}} .out{{fill:#5d7f95}} .tit{{fill:#8badc4}}
+  .cur{{fill:#1479c9}} .pr{{fill:#1479c9}}
   @media (prefers-color-scheme: dark){{
-    .win{{fill:#0d1117;stroke:#30363d}}
-    .bar{{fill:#161b22}}
-    .cmd{{fill:#e6edf3}} .out{{fill:#8b949e}} .tit{{fill:#6e7781}}
-    .cur{{fill:#58a6ff}} .pr{{fill:#58a6ff}}
+    .win{{fill:#0f1b26;stroke:#2b4257}}
+    .bar{{fill:#16283a}}
+    .cmd{{fill:#cfe6f5}} .out{{fill:#8badc4}} .tit{{fill:#5d7f95}}
+    .cur{{fill:#58b6f8}} .pr{{fill:#58b6f8}}
   }}
   .blink{{animation:bl 1s steps(1) infinite}}
   @keyframes bl{{0%,50%{{opacity:1}}50.01%,100%{{opacity:0}}}}
@@ -98,7 +99,7 @@ def build():
     s.append(f'<rect class="scan" x="0" y="{-H}" width="{W}" height="{H}" fill="url(#g)" opacity=".05"/>')
     s.append('<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">'
              '<stop offset="0" stop-color="transparent"/>'
-             '<stop offset=".9" stop-color="#58a6ff"/>'
+             '<stop offset=".9" stop-color="#58b6f8"/>'
              '<stop offset="1" stop-color="transparent"/></linearGradient></defs>')
     s.append("</svg>")
     return "\n".join(s)

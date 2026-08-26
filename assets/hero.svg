@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 190" width="240" height="190" role="img" aria-label="terminal">
 <style>
-  .win{fill:#ffffff;stroke:#d0d7de}
-  .bar{fill:#f6f8fa}
-  .cmd{fill:#1f2328} .out{fill:#6e7781} .tit{fill:#8b949e}
-  .cur{fill:#0969da} .pr{fill:#0969da}
+  .win{fill:#f4fafe;stroke:#bcdcef}
+  .bar{fill:#e3f1fb}
+  .cmd{fill:#2b4257} .out{fill:#5d7f95} .tit{fill:#8badc4}
+  .cur{fill:#1479c9} .pr{fill:#1479c9}
   @media (prefers-color-scheme: dark){
-    .win{fill:#0d1117;stroke:#30363d}
-    .bar{fill:#161b22}
-    .cmd{fill:#e6edf3} .out{fill:#8b949e} .tit{fill:#6e7781}
-    .cur{fill:#58a6ff} .pr{fill:#58a6ff}
+    .win{fill:#0f1b26;stroke:#2b4257}
+    .bar{fill:#16283a}
+    .cmd{fill:#cfe6f5} .out{fill:#8badc4} .tit{fill:#5d7f95}
+    .cur{fill:#58b6f8} .pr{fill:#58b6f8}
   }
   .blink{animation:bl 1s steps(1) infinite}
   @keyframes bl{0%,50%{opacity:1}50.01%,100%{opacity:0}}
@@ -34,5 +34,5 @@
 <g class="l4"><g transform="translate(12.00,128.00) scale(0.01100,-0.01100)" class="pr"><path transform="translate(0.0,0)" d="M60 -101V36H148V122H237V207H325V293H414V327H325V412H237V498H148V583H60V720H187V634H275V549H364V463H451V377H541V242H451V156H364V71H275V-15H187V-101Z"/></g><g transform="translate(20.80,128.00) scale(0.01100,-0.01100)" class="out"><path transform="translate(0.0,0)" d="M151 -193V-103H60V-3H161V-93H424V78H151V169H60V359H151V450H434V359H525V-103H434V-193ZM161 179H424V350H161Z"/><path transform="translate(586.0,0)" d="M151 -12V78H60V359H151V450H433V359H525V88H616V-12H515V78H433V-12ZM161 88H423V350H161Z"/><path transform="translate(1263.0,0)" d="M60 -12V450H343V359H423V450H616V359H706V-12H606V350H433V-12H333V350H161V-12Z"/><path transform="translate(2030.0,0)" d="M151 -12V78H60V359H151V450H433V359H525V260H423V350H161V270H343V169H161V88H423V180H525V79H433V-12Z"/><path transform="translate(2616.0,0)" d="M60 -12V88H423V169H151V260H60V359H151V450H525V350H161V270H433V179H525V78H433V-12Z"/><path transform="translate(3602.0,0)" d="M151 -12V78H60V359H151V450H433V359H525V88H616V-12H515V78H433V-12ZM161 88H423V350H161Z"/><path transform="translate(4279.0,0)" d="M151 -193V-103H60V-3H161V-93H424V78H151V169H60V359H151V450H434V359H525V-103H434V-193ZM161 179H424V350H161Z"/><path transform="translate(4865.0,0)" d="M151 -12V78H60V359H151V450H433V359H525V260H423V350H161V270H343V169H161V88H423V180H525V79H433V-12Z"/><path transform="translate(5451.0,0)" d="M60 -12V450H433V359H525V-12H423V350H161V-12Z"/><path transform="translate(6037.0,0)" d="M241 -12V78H151V350H60V450H151V631H251V450H525V350H251V88H515V179H616V78H525V-12Z"/><path transform="translate(6714.0,0)" d="M60 -12V88H423V169H151V260H60V359H151V450H525V350H161V270H433V179H525V78H433V-12Z"/></g></g>
 <rect class="cur blink" x="12" y="140" width="7" height="11"/>
 <rect class="scan" x="0" y="-190" width="240" height="190" fill="url(#g)" opacity=".05"/>
-<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="transparent"/><stop offset=".9" stop-color="#58a6ff"/><stop offset="1" stop-color="transparent"/></linearGradient></defs>
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="transparent"/><stop offset=".9" stop-color="#58b6f8"/><stop offset="1" stop-color="transparent"/></linearGradient></defs>
 </svg>

@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 415 132" width="415" height="132" role="img" aria-label="claude-code-simple-statusline">
 <style>
-  .bg{fill:#ffffff;stroke:#d0d7de}
-  .name{fill:#0969da} .desc{fill:#656d76} .meta{fill:#656d76} .ico{fill:#1f2328}
+  .bg{fill:#f4fafe;stroke:#bcdcef}
+  .name{fill:#1479c9} .desc{fill:#5d7f95} .meta{fill:#5d7f95} .ico{fill:#2b4257}
   @media (prefers-color-scheme: dark){
-    .bg{fill:#0d1117;stroke:#30363d}
-    .name{fill:#4493f8} .desc{fill:#8b949e} .meta{fill:#8b949e} .ico{fill:#e6edf3}
+    .bg{fill:#0f1b26;stroke:#2b4257}
+    .name{fill:#58b6f8} .desc{fill:#8badc4} .meta{fill:#8badc4} .ico{fill:#cfe6f5}
   }
   .beat{animation:b 4s ease-in-out infinite}
   @keyframes b{0%,100%{opacity:.25}50%{opacity:.9}}

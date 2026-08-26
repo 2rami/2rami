@@ -33,12 +33,14 @@ LANG_COLOR = {
     "Go": "#00ADD8", "C#": "#178600", "HTML": "#e34c26", "CSS": "#563d7c",
 }
 
+# 팔레트는 히어로 그림에서 실제로 뽑은 값이다(양자화 상위 색).
+# 하늘 #138dfa · 구름 #f7f7f0 · 연청록 #9ec5c8 · 민트 #80e4e6
 STYLE = """
-  .bg{fill:#ffffff;stroke:#d0d7de}
-  .name{fill:#0969da} .desc{fill:#656d76} .meta{fill:#656d76} .ico{fill:#1f2328}
+  .bg{fill:#f4fafe;stroke:#bcdcef}
+  .name{fill:#1479c9} .desc{fill:#5d7f95} .meta{fill:#5d7f95} .ico{fill:#2b4257}
   @media (prefers-color-scheme: dark){
-    .bg{fill:#0d1117;stroke:#30363d}
-    .name{fill:#4493f8} .desc{fill:#8b949e} .meta{fill:#8b949e} .ico{fill:#e6edf3}
+    .bg{fill:#0f1b26;stroke:#2b4257}
+    .name{fill:#58b6f8} .desc{fill:#8badc4} .meta{fill:#8badc4} .ico{fill:#cfe6f5}
   }
   .beat{animation:b 4s ease-in-out infinite}
   @keyframes b{0%,100%{opacity:.25}50%{opacity:.9}}

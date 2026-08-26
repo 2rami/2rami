@@ -53,7 +53,7 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     n = 0
     for name, move in sorted(PLAN.items()):
-        for tone, fill in (("dark", "#000"), ("light", "#fff")):
+        for tone, fill in (("dark", "#2b4257"), ("light", "#cfe6f5")):
             src = SRC / f"{name}-{tone}.svg"
             if not src.exists():
                 print(f"  없음: {src.name}", file=sys.stderr)

@@ -19,7 +19,7 @@
 }
 ```
 
-<!-- TODO: 장르별 애니 GIF 3~5장 한 줄 (높이 통일) -->
+<img src="./assets/band.png" width="846" alt=""/>
 
 ---
 
