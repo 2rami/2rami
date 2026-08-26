@@ -27,10 +27,21 @@ MAX_REF_PX = 512
 MAX_REF_KB = 100
 
 
-def shrink(path):
-    """참조를 512px·100KB 안으로 줄인다. 그라데이션이 있으면 PNG 가 안 줄어드니 JPEG 로."""
+def shrink(path, bg=(168, 216, 240)):
+    """참조를 512px·100KB 안으로 줄인다. 그라데이션이 있으면 PNG 가 안 줄어드니 JPEG 로.
+
+    투명 배경은 반드시 채워서 보낸다. JPEG 는 알파가 없어 그냥 변환하면 투명한
+    자리가 검정이 되고, 그 검정이 참조로 들어가 어두운 그림이 나온다.
+    기본값은 연한 하늘색 — 배경을 하늘로 이어 그리게 하는 편이 자연스럽다.
+    """
     from PIL import Image
-    im = Image.open(path).convert("RGB")
+    src = Image.open(path)
+    if src.mode in ("RGBA", "LA", "P"):
+        src = src.convert("RGBA")
+        im = Image.new("RGB", src.size, bg)
+        im.paste(src, mask=src.split()[-1])
+    else:
+        im = src.convert("RGB")
     if max(im.size) > MAX_REF_PX:
         im.thumbnail((MAX_REF_PX, MAX_REF_PX), Image.LANCZOS)
     for q in (85, 75, 65, 55):
