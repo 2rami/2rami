@@ -44,6 +44,12 @@ GEN = ROOT / "assets" / "gen"
 OUT = ROOT / "counter" / "sprites.json"
 
 H = 150            # 도트 격자에 맞는 높이 (원본 테마와 같다)
+
+# 자릿수별 목표 키. 원본을 실측한 값이다 — 앉거나 숙인 자세는 실제로 작다
+# (7 무릎앉기 129 · 8 숙이기 132 · 9 쪼그려앉기 116). 열 칸을 다 150 으로
+# 맞추면 앉은 캐릭터가 서 있는 캐릭터만큼 커져 앉은 티가 안 난다. 렌더러는
+# 발을 바닥에 맞추므로 키가 작으면 그만큼 아래로 내려앉는다.
+HEIGHTS = [145, 150, 148, 145, 144, 146, 147, 129, 132, 116]
 COLORS = 44        # 24·28 은 눈동자와 옷 무늬가 뭉갠다
 CHROMA = np.array([255, 0, 255])
 K = np.ones((3, 3))
@@ -103,11 +109,21 @@ def shrink(im, h=H, colors=COLORS):
     return trim(Image.fromarray(np.dstack([np.array(rgb), alpha]), "RGBA"))
 
 
-def bake(path):
-    return shrink(trim(key(path)))
+def bake(path, h=H):
+    return shrink(trim(key(path)), h=h)
 
 
-def card_of(im, thr=232, fill=0.80):
+def card_of(im, thr=232, fill=0.70):
+    """제일 큰 '속이 꽉 찬 흰 사각형'을 찾는다.
+
+    전에는 가로가 세로보다 길어야 카드로 쳤다. 열 명이 다 차렷으로 카드를
+    가슴에 안고 있을 때는 맞았지만, 지금은 한 손으로 늘어뜨리거나 바닥에
+    세워 둔 자세가 섞여 세로로 긴 카드가 나온다 — 그 조건을 그대로 두면
+    카드를 못 찾고 굽기가 멈춘다. 대신 '너무 길쭉하지 않을 것'으로 바꾼다.
+
+    채움률도 0.80 에서 낮췄다. 기울어진 카드는 외접사각형을 그만큼 못 채운다
+    (10도만 기울어도 0.75 로 떨어진다). 옷은 팔과 주름에 잘려 이보다 낮다.
+    """
     a = np.array(im)
     m = (a[..., 3] > 128) & (a[..., :3] > thr).all(axis=2)
     lab, n = ndimage.label(m)
@@ -115,7 +131,9 @@ def card_of(im, thr=232, fill=0.80):
     for i in range(1, n + 1):
         ys, xs = np.where(lab == i)
         h, w = int(np.ptp(ys)) + 1, int(np.ptp(xs)) + 1
-        if w < 12 or h < 8 or w < h:                       # 카드는 세로보다 가로가 길다
+        if w < 16 or h < 16:                               # 숫자 도트(15x21)가 들어갈 최소치
+            continue
+        if not (0.45 <= w / h <= 3.0):                     # 길쭉한 흰 옷·소매를 거른다
             continue
         if len(ys) / (w * h) < fill:
             continue
@@ -170,7 +188,7 @@ def main():
         paths = [GEN / f"card-{d}-{slug}.png",
                  GEN / f"anim-{d}-{slug}-a.png",
                  GEN / f"anim-{d}-{slug}-b.png"]
-        frames, card = align([bake(p) for p in paths])
+        frames, card = align([bake(p, HEIGHTS[d]) for p in paths])
         w, h = frames[0].size
         b64 = strip(frames)
         slots.append({"name": name, "slug": slug, "w": w, "h": h,
