@@ -26,7 +26,7 @@ DOT = 2
 ICON = L.N * DOT            # 32
 H = 44
 FS = 15
-PADL, MID, PADR = 8, 12, 13
+PADL, MID, PADR = 10, 14, 12
 
 STYLE = """
   .chip{fill:#f4fafe;stroke:#bcdcef}
@@ -39,13 +39,22 @@ STYLE = """
 
 
 def badge(slug, label, fn):
-    tw = round(T.measure(label, FS, "bold"))
-    w = PADL + ICON + MID + tw + PADR
     layers = [(c, cells) for c, cells in fn()]
+    # 로고마다 격자를 채운 범위가 다르다(고양이는 귀까지 y1, 봉투는 y3). 격자
+    # 왼쪽 위에 맞춰 얹으면 배지마다 여백과 로고-글자 간격이 제각각이 된다.
+    # 그래서 실제로 찍힌 칸의 경계를 재서 그만큼 당겨 붙인다.
+    xs = [x for _, cells in layers for x, _ in cells]
+    ys = [y for _, cells in layers for _, y in cells]
+    x0, x1, y0, y1 = min(xs), max(xs) + 1, min(ys), max(ys) + 1
+    lw = (x1 - x0) * DOT
+    ox, oy = PADL - x0 * DOT, (H - (y1 - y0) * DOT) // 2 - y0 * DOT
+    tw = round(T.measure(label, FS, "bold"))
+    tx = PADL + lw + MID
+    w = tx + tw + PADR
     body = []
     for color, cells in layers:
         cls = {"MONO": "mono", None: "hole"}.get(color)
-        chunk = dots([(color if cls is None else "#000", cells)], PADL, (H - ICON) // 2)
+        chunk = dots([(color if cls is None else "#000", cells)], ox, oy)
         body.append(chunk.replace('fill="#000"', f'class="{cls}"') if cls else chunk)
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {H}" '
             f'width="{w}" height="{H}" role="img" aria-label="{label}">'
@@ -53,7 +62,7 @@ def badge(slug, label, fn):
             f'<rect class="chip" x=".5" y=".5" width="{w - 1}" height="{H - 1}" '
             f'rx="8" stroke-width="1"/>'
             + "".join(body)
-            + T.text(label, PADL + ICON + MID, H / 2 + FS * .36, FS,
+            + T.text(label, tx, H / 2 + FS * .36, FS,
                      weight="bold", cls="nm")
             + "</svg>"), w
 

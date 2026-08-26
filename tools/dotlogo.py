@@ -162,13 +162,14 @@ def gmail():
 
 
 def github():
-    head = disc(8, 8, 6.4)
-    ear = {(3, 1), (4, 1), (4, 2), (5, 2), (3, 2), (12, 1), (11, 1), (11, 2),
-           (10, 2), (12, 2)}
-    leg = box(4, 13, 6, 15) | box(9, 13, 11, 15)
-    eyes = box(5, 6, 6, 8) | box(9, 6, 10, 8)
-    mouth = box(7, 10, 8, 11)
-    return [("MONO", head | ear | leg), (None, eyes | mouth)]
+    """얼굴만. 전신(몸·다리·꼬리)을 16칸에 욱여넣으면 머리가 칩을 꽉 채운
+    사각형이 되어 고양이로 안 읽힌다. 귀는 삼각형으로 머리 위에 세운다."""
+    head = disc(8, 8.5, 5.4)
+    ear = (box(4, 1, 5, 1) | box(3, 2, 5, 2) | box(3, 3, 6, 3)
+           | box(10, 1, 11, 1) | box(10, 2, 12, 2) | box(9, 3, 12, 3))
+    eyes = box(5, 7, 6, 8) | box(9, 7, 10, 8)
+    mouth = box(7, 10, 8, 10) | {(6, 11), (9, 11)}
+    return [("MONO", head | ear), (None, eyes | mouth)]
 
 
 CONTACT = [
