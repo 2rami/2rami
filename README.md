@@ -64,7 +64,7 @@
 
 ---
 
-<img src="./assets/counter.svg" alt="visitor counter" height="152"/>
+<img src="./assets/counter.svg" alt="visitor counter" height="157"/>
 
 <!-- ═══════════════ CONNECT ═══════════════ -->
 <picture>

@@ -38,13 +38,14 @@ const GAP = 4;
 const PAD = 10;
 const TOP = 6;            // 카드 위변과 제일 큰 캐릭터 머리 사이
 const GROUND = 7;         // 발밑 바닥 띠 두께
+const BOT = 5;            // 바닥 띠와 칸 아래변 사이 — 없으면 발이 테두리에 닿는다
 const PLATE_W = 34;       // 캐릭터가 든 카드
 const PLATE_H = 28;
 const PDOT = 3;           // 카드 위 숫자의 도트 한 칸
 const DW = 5, DH = 7;     // 숫자 도트 격자
 const LBL = 9;
 const H_CHAR = sprites.h;
-const CELL_H = TOP + H_CHAR + GROUND;
+const CELL_H = TOP + H_CHAR + GROUND + BOT;
 
 // 자릿수는 5x7 도트로 직접 그린다. Pixelify Sans 의 5 는 윗변이 말려 8·S 와
 // 안 갈린다 — 굵기를 바꿔도 같아서 글자 대신 도트를 찍는다. 카드 위 숫자가
