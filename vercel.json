@@ -1,0 +1,3 @@
+{
+  "rewrites": [{ "source": "/counter.svg", "destination": "/api/counter" }]
+}
