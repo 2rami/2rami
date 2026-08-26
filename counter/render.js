@@ -25,16 +25,14 @@
 import sprites from "./sprites.json" with { type: "json" };
 
 const PAL = {
-  light: { sky0: "#e8f4fb", sky1: "#c8e6f7", card: "#ffffff", edge: "#bcdcef",
-           ground: "#b8dcf0", lbl: "#5d7f95", cloud: "#ffffff", cop: .8,
+  light: { sky0: "#e8f4fb", sky1: "#c8e6f7", ground: "#b8dcf0", lbl: "#5d7f95", cloud: "#ffffff", cop: .8,
            plate: "#ffffff", pedge: "#7fa9c2", pnum: "#14303f" },
-  dark: { sky0: "#14202c", sky1: "#1d3a52", card: "#0f1b26", edge: "#2b4257",
-          ground: "#2a4a63", lbl: "#8badc4", cloud: "#243849", cop: .55,
+  dark: { sky0: "#14202c", sky1: "#1d3a52", ground: "#2a4a63", lbl: "#8badc4", cloud: "#243849", cop: .55,
           plate: "#e4eef5", pedge: "#4d7086", pnum: "#12293a" },
 };
 
-const CELL = 76;          // 칸 폭 — 제일 넓은 동작(스파키 도발 67px)이 여유 있게 들어간다
-const GAP = 4;
+const CELL = 70;          // 칸 폭 — 제일 넓은 동작(스파키 도발 67px)이 들어간다
+const GAP = 2;
 const PAD = 10;
 const TOP = 6;            // 카드 위변과 제일 큰 캐릭터 머리 사이
 const GROUND = 7;         // 발밑 바닥 띠 두께
@@ -95,7 +93,7 @@ export function render(count, label = "visitors") {
     const end = mode === "light" ? "" : "}";
     css.push(
       `${open}.sky0{stop-color:${p.sky0}}.sky1{stop-color:${p.sky1}}` +
-        `.card{fill:${p.card};stroke:${p.edge}}.gnd{fill:${p.ground}}` +
+        `.gnd{fill:${p.ground}}` +
         `.lbl{fill:${p.lbl}}.plate{fill:${p.plate};stroke:${p.pedge}}` +
         `.pnum{fill:${p.pnum}}` +
         `.cloud{fill:${p.cloud};opacity:${p.cop}}${end}`
@@ -154,19 +152,16 @@ export function render(count, label = "visitors") {
   }
   parts.push(`</g></g>`);
 
+  parts.push(
+    `<rect class="gnd" x="${PAD}" y="${PAD + TOP + H_CHAR + GROUND - 4}" ` +
+      `width="${W - PAD * 2}" height="3" rx="1.5"/>`
+  );
+
   for (let i = 0; i < n; i++) {
     const d = Number(s[i]);
     const sl = sprites.slots[d];
     const x = PAD + i * (CELL + GAP);
     const y = PAD;
-    parts.push(
-      `<rect class="card" x="${x + 0.5}" y="${y + 0.5}" width="${CELL - 1}" ` +
-        `height="${CELL_H - 1}" rx="6" stroke-width="1" fill-opacity=".62"/>`
-    );
-    // 발밑 바닥 — 캐릭터가 공중에 뜨지 않게 딛는 자리를 준다
-    const gy = y + TOP + H_CHAR + GROUND - 4;
-    parts.push(`<rect class="gnd" x="${x + 5}" y="${gy}" width="${CELL - 10}" height="3" rx="1.5"/>`);
-
     // 키가 제각각이라 발을 바닥에 맞춘다. 위로 남는 자리는 그냥 여백이 된다.
     const cx = x + Math.round((CELL - sl.w) / 2);
     const cy = y + TOP + (H_CHAR - sl.h);
