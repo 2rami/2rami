@@ -20,9 +20,9 @@ import sprites from "./sprites.json" with { type: "json" };
 
 const PAL = {
   light: { sky0: "#e8f4fb", sky1: "#c8e6f7", card: "#ffffff", edge: "#bcdcef",
-           ground: "#b8dcf0", num: "#1479c9", lbl: "#5d7f95", cloud: "#ffffff" },
+           ground: "#b8dcf0", num: "#1479c9", lbl: "#5d7f95", cloud: "#ffffff", cop: .8 },
   dark: { sky0: "#14202c", sky1: "#1d3a52", card: "#0f1b26", edge: "#2b4257",
-          ground: "#2a4a63", num: "#58b6f8", lbl: "#8badc4", cloud: "#243849" },
+          ground: "#2a4a63", num: "#58b6f8", lbl: "#8badc4", cloud: "#243849", cop: .55 },
 };
 
 const CELL = 76;          // 칸 폭 — 제일 넓은 동작(스파키 도발 67px)이 여유 있게 들어간다
@@ -77,7 +77,8 @@ export function render(count, label = "visitors") {
     css.push(
       `${open}.sky0{stop-color:${p.sky0}}.sky1{stop-color:${p.sky1}}` +
         `.card{fill:${p.card};stroke:${p.edge}}.gnd{fill:${p.ground}}` +
-        `.num{fill:${p.num}}.lbl{fill:${p.lbl}}.cloud{fill:${p.cloud}}${end}`
+        `.num{fill:${p.num}}.lbl{fill:${p.lbl}}` +
+        `.cloud{fill:${p.cloud};opacity:${p.cop}}${end}`
     );
   }
 
@@ -119,7 +120,7 @@ export function render(count, label = "visitors") {
       `<clipPath id="cc"><rect x="0" y="0" width="${W}" height="${H}" rx="8"/></clipPath>` +
       defs.join("") + `</defs>`,
     `<rect width="${W}" height="${H}" rx="8" fill="url(#sky)"/>`,
-    `<g clip-path="url(#cc)" opacity=".55"><g class="drift">`,
+    `<g clip-path="url(#cc)"><g class="drift">`,
   ];
   // 구름 — 자리는 수에서 뽑아 같은 수면 늘 같은 그림이 나오게 한다
   for (let i = 0; i < 4; i++) {
