@@ -1,0 +1,52 @@
+name: Generate Grass RPG
+
+# 잔디 지형은 어제까지의 기여를 그린 그림이라 하루가 지나면 낡는다.
+# 03:41 KST 에 다시 구워 올린다. 정시를 피한 것은 그 시각에 전 세계 크론이
+# 몰려 GitHub 이 실행을 뒤로 미루기 때문이다.
+on:
+  schedule:
+    - cron: "41 18 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: grass-rpg
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install fonttools
+
+      - name: Generate
+        env:
+          # GH_PAT 가 있으면 비공개 기여까지 센다. 저장소 기본 토큰은 주인이
+          # 봇이라 남의 달력을 보는 셈이 되어 공개 기여만 잡힌다.
+          GITHUB_TOKEN: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+          GRASS_USER: 2rami
+        run: python3 tools/make_grass_rpg.py
+
+      - name: Commit & Push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # 경로를 콕 집어 담는다. add -A 로 쓸어 담으면 다른 작업이 만든
+          # 생성물까지 이 커밋에 섞인다.
+          git add assets/grass-rpg.svg
+          git diff --staged --quiet && exit 0
+          git commit -m "chore(잔디): 지형 갱신"
+          for i in 1 2 3; do
+            git push && exit 0
+            # 같은 시간대의 다른 작업이 먼저 밀어 넣었을 수 있다
+            git pull --rebase
+          done
+          exit 1
