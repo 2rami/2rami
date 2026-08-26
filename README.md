@@ -64,7 +64,7 @@
 
 ---
 
-<img src="./assets/counter.svg" alt="visitor counter"/>
+<img src="https://2rami.vercel.app/counter.svg" alt="visitor counter"/>
 
 <!-- ═══════════════ CONNECT ═══════════════ -->
 <picture>
