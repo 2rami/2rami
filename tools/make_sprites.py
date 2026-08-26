@@ -25,7 +25,11 @@
 꺼진 양과 프레임별 가로폭 변동으로 잰다. 팔을 뻗어야 둘 다 커진다.
 모자란 칸은 렌더러가 위아래로 1~2px 띄워 살린다.
 
-원본 시트 없이 sprites.json 만 있을 때는 `--rebob` 으로 부유만 다시 잰다.
+칸마다 살색도 한 점 뽑아 굽는다. 렌더러가 든 카드 양옆에 손을 그리는데,
+캐릭터마다 살색이 달라서 한 색으로 칠하면 창백한 캐릭터에 얼룩이 된다.
+얼굴 자리에서 제일 많이 쓰인 살색을 고르고, 못 고르면 아주 옅은 살색으로 둔다.
+
+원본 시트 없이 sprites.json 만 있을 때는 `--remeasure` 로 잰 값만 다시 뽑는다.
 구운 띠에서 프레임을 도로 떼어내 같은 잣대로 재므로 결과가 같다.
 """
 import base64
@@ -134,6 +138,28 @@ def bob_of(ims):
     return 0
 
 
+SKIN_FALLBACK = "#f4e6e1"   # 창백한 캐릭터(스파키·케이)는 살색이 흰색에 묻혀 안 잡힌다
+
+
+def skin_of(ims):
+    """얼굴에서 제일 많이 쓰인 살색. 든 카드를 쥔 손에 쓴다."""
+    from collections import Counter
+
+    im = ims[0]
+    w, h = im.size
+    face = im.crop((w // 4, int(h * 0.08), w - w // 4, int(h * 0.45)))
+    c = Counter()
+    for r, g, b, a in list(face.getdata()):
+        if a < 200:
+            continue
+        if r >= g >= b and r > 140 and 8 <= r - b <= 120:
+            c[(r, g, b)] += 1
+    if not c:
+        return SKIN_FALLBACK
+    r, g, b = c.most_common(1)[0][0]
+    return f"#{r:02x}{g:02x}{b:02x}"
+
+
 def strip(ims, w, h):
     """프레임을 가로로 이어 붙여 한 장으로. 팔레트를 한 번만 잡게 하려는 것."""
     s = Image.new("RGBA", (w * len(ims), h), (0, 0, 0, 0))
@@ -151,34 +177,36 @@ def main():
         ims, w, h, dur = frames_of(slug, pose)
         b64 = strip(ims, w, h)
         bob = bob_of(ims)
+        skin = skin_of(ims)
         total += len(b64)
         slots.append({"name": NAMES[slug], "slug": slug, "pose": pose,
                       "w": w, "h": h, "n": len(ims), "dur": dur,
-                      "bob": bob, "png": b64})
+                      "bob": bob, "skin": skin, "png": b64})
         print(f"  {d} {NAMES[slug]:<5} {pose:<10} {w}x{h} x{len(ims)}프레임 "
-              f"{dur}ms  {len(b64)*3//4//1024}KB  부유{bob}")
+              f"{dur}ms  {len(b64)*3//4//1024}KB  부유{bob} 살{skin}")
 
     H = max(s["h"] for s in slots)
     OUT.write_text(json.dumps({"h": H, "slots": slots}, separators=(",", ":")))
     print(f"\n  {OUT.name}  10칸 · 칸높이 {H} · {OUT.stat().st_size//1024}KB")
 
 
-def rebob():
-    """구워 둔 sprites.json 의 부유만 다시 잰다 (원본 시트가 없을 때)."""
+def remeasure():
+    """구워 둔 sprites.json 에서 잰 값(부유·살색)만 다시 뽑는다 (원본 시트가 없을 때)."""
     d = json.loads(OUT.read_text())
     for i, s in enumerate(d["slots"]):
         strip_im = Image.open(io.BytesIO(base64.b64decode(s["png"]))).convert("RGBA")
         w, h, n = s["w"], s["h"], s["n"]
         ims = [strip_im.crop((k * w, 0, (k + 1) * w, h)) for k in range(n)]
         s["bob"] = bob_of(ims)
-        print(f"  {i} {s['name']:<5} {s['pose']:<10} 부유{s['bob']}")
+        s["skin"] = skin_of(ims)
+        print(f"  {i} {s['name']:<5} {s['pose']:<10} 부유{s['bob']} 살{s['skin']}")
     OUT.write_text(json.dumps(d, separators=(",", ":")))
     print(f"\n  {OUT.name} 갱신 — 부유 준 칸 "
           f"{sum(1 for s in d['slots'] if s['bob'])}개")
 
 
 if __name__ == "__main__":
-    if "--rebob" in sys.argv:
-        rebob()
+    if "--remeasure" in sys.argv:
+        remeasure()
     else:
         main()

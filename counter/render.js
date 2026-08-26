@@ -7,6 +7,12 @@
 // 그림을 data URI 로 박는 이유는 GitHub 때문이다. SVG 를 <img> 로 걸면 바깥
 // 파일 참조가 막히지만 같은 문서 안의 data URI 는 그대로 그려진다.
 //
+// 자릿수는 캐릭터가 **손에 든 카드** 위에 적힌다 (moe-counter 의 original 테마를
+// 패러디한 것 — 거기서도 캐릭터가 번호판을 몸 앞에 들고 있다). 카드는 벡터로
+// 그려 캐릭터 위에 얹는다. 그림 자체는 포즈가 고정돼 있어 손 모양을 바꿀 수
+// 없으므로, 카드 양옆에 그 캐릭터의 살색으로 손을 하나씩 붙여 쥔 것처럼 보이게
+// 한다. 살색은 생성기가 얼굴에서 뽑아 sprites.json 에 적어 둔다.
+//
 // 한 칸은 동작 한 벌(4~6프레임)이 도는 애니메이션이다. 프레임은 가로 띠 한 장에
 // 이어 붙여 두고 창문을 고정한 채 띠를 옆으로 민다. 같은 자릿수가 두 번 나와도
 // 그림은 <defs> 에 한 번만 박고 <use> 로 부른다 — 안 그러면 base64 가 통째로
@@ -20,9 +26,11 @@ import sprites from "./sprites.json" with { type: "json" };
 
 const PAL = {
   light: { sky0: "#e8f4fb", sky1: "#c8e6f7", card: "#ffffff", edge: "#bcdcef",
-           ground: "#b8dcf0", num: "#1479c9", lbl: "#5d7f95", cloud: "#ffffff", cop: .8 },
+           ground: "#b8dcf0", lbl: "#5d7f95", cloud: "#ffffff", cop: .8,
+           plate: "#ffffff", pedge: "#7fa9c2", pnum: "#14303f" },
   dark: { sky0: "#14202c", sky1: "#1d3a52", card: "#0f1b26", edge: "#2b4257",
-          ground: "#2a4a63", num: "#58b6f8", lbl: "#8badc4", cloud: "#243849", cop: .55 },
+          ground: "#2a4a63", lbl: "#8badc4", cloud: "#243849", cop: .55,
+          plate: "#e4eef5", pedge: "#4d7086", pnum: "#12293a" },
 };
 
 const CELL = 76;          // 칸 폭 — 제일 넓은 동작(스파키 도발 67px)이 여유 있게 들어간다
@@ -30,30 +38,40 @@ const GAP = 4;
 const PAD = 10;
 const TOP = 6;            // 카드 위변과 제일 큰 캐릭터 머리 사이
 const GROUND = 7;         // 발밑 바닥 띠 두께
-const DOT = 3;            // 자릿수 도트 한 칸
-const NUM_BOX = 5 * DOT + 5;
+const PLATE_W = 34;       // 캐릭터가 든 카드
+const PLATE_H = 28;
+const PDOT = 3;           // 카드 위 숫자의 도트 한 칸
+const DW = 5, DH = 7;     // 숫자 도트 격자
 const LBL = 9;
 const H_CHAR = sprites.h;
-const CELL_H = TOP + H_CHAR + GROUND + NUM_BOX;
+const CELL_H = TOP + H_CHAR + GROUND;
 
-// 자릿수는 3x5 도트로 직접 그린다. Pixelify Sans 의 5 는 윗변이 말려 8·S 와
-// 안 갈린다 — 굵기를 바꿔도 같아서 글자 대신 도트를 찍는다.
+// 자릿수는 5x7 도트로 직접 그린다. Pixelify Sans 의 5 는 윗변이 말려 8·S 와
+// 안 갈린다 — 굵기를 바꿔도 같아서 글자 대신 도트를 찍는다. 카드 위 숫자가
+// 이제 칸의 주인공이라 3x5 로는 가늘어서 격자를 키웠다.
 const DIGITS = [
-  "111101101101111", "010110010010111", "111001111100111", "111001111001111",
-  "101101111001001", "111100111001111", "111100111101111", "111001010010010",
-  "111101111101111", "111101111001111",
+  "01110" + "10001" + "10011" + "10101" + "11001" + "10001" + "01110",
+  "00100" + "01100" + "00100" + "00100" + "00100" + "00100" + "01110",
+  "01110" + "10001" + "00001" + "00010" + "00100" + "01000" + "11111",
+  "11111" + "00010" + "00100" + "00010" + "00001" + "10001" + "01110",
+  "00010" + "00110" + "01010" + "10010" + "11111" + "00010" + "00010",
+  "11111" + "10000" + "11110" + "00001" + "00001" + "10001" + "01110",
+  "00110" + "01000" + "10000" + "11110" + "10001" + "10001" + "01110",
+  "11111" + "00001" + "00010" + "00100" + "01000" + "01000" + "01000",
+  "01110" + "10001" + "10001" + "01110" + "10001" + "10001" + "01110",
+  "01110" + "10001" + "10001" + "01111" + "00001" + "00010" + "01100",
 ];
 
 function digit(ch, x, y) {
   const bits = DIGITS[Number(ch)];
   const out = [];
-  for (let r = 0; r < 5; r++) {
+  for (let r = 0; r < DH; r++) {
     let c = 0;
-    while (c < 3) {
-      if (bits[r * 3 + c] !== "1") { c++; continue; }
+    while (c < DW) {
+      if (bits[r * DW + c] !== "1") { c++; continue; }
       let n = 1;                              // 가로로 이어진 칸은 한 사각형으로
-      while (c + n < 3 && bits[r * 3 + c + n] === "1") n++;
-      out.push(`<rect x="${x + c * DOT}" y="${y + r * DOT}" width="${n * DOT}" height="${DOT}"/>`);
+      while (c + n < DW && bits[r * DW + c + n] === "1") n++;
+      out.push(`<rect x="${x + c * PDOT}" y="${y + r * PDOT}" width="${n * PDOT}" height="${PDOT}"/>`);
       c += n;
     }
   }
@@ -77,7 +95,8 @@ export function render(count, label = "visitors") {
     css.push(
       `${open}.sky0{stop-color:${p.sky0}}.sky1{stop-color:${p.sky1}}` +
         `.card{fill:${p.card};stroke:${p.edge}}.gnd{fill:${p.ground}}` +
-        `.num{fill:${p.num}}.lbl{fill:${p.lbl}}` +
+        `.lbl{fill:${p.lbl}}.plate{fill:${p.plate};stroke:${p.pedge}}` +
+        `.pnum{fill:${p.pnum}}` +
         `.cloud{fill:${p.cloud};opacity:${p.cop}}${end}`
     );
   }
@@ -155,15 +174,29 @@ export function render(count, label = "visitors") {
       `<svg x="${cx}" y="${cy}" width="${sl.w}" height="${sl.h}" ` +
       `viewBox="0 0 ${sl.w} ${sl.h}">` +
       `<g class="a${d}" style="animation-delay:${delay}s"><use href="#c${d}"/></g></svg>`;
+
+    // 든 카드 — 몸통 앞. 손은 카드 밑으로 3px 들어가 있어 쥔 것처럼 보인다.
+    const px = x + Math.round((CELL - PLATE_W) / 2);
+    const py = cy + Math.round(sl.h * 0.56) - Math.round(PLATE_H / 2);
+    const hy = py + Math.round(PLATE_H * 0.34);
+    const skin = sl.skin || "#f4e6e1";
+    const plate =
+      `<rect x="${px + 1}" y="${py + 2}" width="${PLATE_W}" height="${PLATE_H}" rx="2" ` +
+        `fill="#000" fill-opacity=".16"/>` +
+      `<g fill="${skin}"><rect x="${px - 5}" y="${hy}" width="9" height="9" rx="2.5"/>` +
+        `<rect x="${px + PLATE_W - 4}" y="${hy}" width="9" height="9" rx="2.5"/></g>` +
+      `<rect class="plate" x="${px + 0.5}" y="${py + 0.5}" width="${PLATE_W - 1}" ` +
+        `height="${PLATE_H - 1}" rx="2" stroke-width="1"/>` +
+      `<g class="pnum">${digit(s[i], px + Math.round((PLATE_W - DW * PDOT) / 2),
+        py + Math.round((PLATE_H - DH * PDOT) / 2))}</g>`;
+
     const bob = sl.bob || 0;
+    const body = cell + plate;    // 카드는 캐릭터가 든 것이라 같이 떠야 한다
     parts.push(
       bob
-        ? `<g class="b${bob}" style="animation-delay:${(delay / 2).toFixed(3)}s">${cell}</g>`
-        : cell
+        ? `<g class="b${bob}" style="animation-delay:${(delay / 2).toFixed(3)}s">${body}</g>`
+        : body
     );
-
-    const nx = x + Math.round((CELL - 3 * DOT) / 2);
-    parts.push(`<g class="num">${digit(s[i], nx, y + CELL_H - NUM_BOX + 1)}</g>`);
   }
 
   if (label) {
