@@ -29,53 +29,74 @@ BAND = 3                        # 옆면 위쪽 잔디 띠
 DAYS = 7
 PAD_L, PAD_R, PAD_T, PAD_B = 56, 70, 76, 44
 
-DOT = 2                         # 도트 한 칸의 화면 픽셀 — 1 이면 너무 잘아 안 읽힌다
+DOT = 3                         # 도트 한 칸의 화면 픽셀
+                                # 칸 수를 늘리는 대신 한 칸을 키운다 —
+                                # 몇 칸 안 되는 도트라야 그림이 안 뭉개진다
 RUNNERS = ["norma", "sparxie", "kei", "aria", "nangong", "sunna"]
 ROWS = [1, 2, 3, 4, 5, 6]       # 각자 다른 요일 줄을 달린다
                                 # 0(맨 뒷줄)은 뒤가 허공이라 떠 보인다 — 비운다
-WEEK_SEC = 0.34                 # 한 주(칸 하나)를 건너는 데 걸리는 시간
-STEP = 6                        # 한 칸을 몇 번에 나눠 밟나 — 12px/6 = 2px 씩
-LEG = 0.36                      # 다리 두 프레임이 한 바퀴 도는 시간
-HOP = 2                         # 두 번째 프레임에서 몸이 뜨는 높이
+CELL_SEC = 0.75                 # 한 칸 주기 — 뛰는 동안과 서 있는 동안을 합친 것
+JUMP = 0.30                     # 그중 뛰는 몫. 나머지는 착지해서 가만히 있는다
+STEP = 4                        # 뛰는 동안 몇 번에 나눠 옮기나 — 12px/4 = 3px 씩
+ARC = [0, -7, -10, -6]          # 도약 중 몸이 뜨는 높이 — 마리오처럼 포물선
 
-QUERY = """{ viewer { contributionsCollection { contributionCalendar {
+CAL = """contributionsCollection { contributionCalendar {
   totalContributions
   weeks { contributionDays { date contributionCount weekday } }
-} } } }"""
+} }"""
 
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 WD = {1: "Mon", 3: "Wed", 5: "Fri"}   # GitHub 주는 일요일 시작 — 0 이 일요일이다
 
-# 하늘색 — README 위쪽 카운터·카드와 같은 계열. 라이트/다크가 다르다
-PAL = {
-    "top":  ["#e8f4fb", "#b8dcf0", "#7cc0e8", "#3d9fdb", "#1479c9"],
-    "dirtL": "#3d5468", "dirtR": "#6a8296",
-    "topDark": ["#14202c", "#1d4460", "#2a6b94", "#3a95c7", "#58b6f8"],
-    "dirtLDark": "#101c26", "dirtRDark": "#22384a",
-    "lbl": "#5d7f95", "lblDark": "#8badc4",
+PALETTES = {
+    # 초록 — 레퍼런스에 충실. 라이트/다크 같은 색이라 어디서 봐도 인상이 같다
+    "green": {
+        "top": ["#2f5134", "#3f7038", "#5f9243", "#8bb851", "#c8e176"],
+        "dirtL": "#352915", "dirtR": "#634529",
+        "lbl": "#6f8a5f", "lblDark": "#8fae7c",
+    },
+    # 하늘색 — README 위쪽 카운터·카드와 같은 계열. 라이트/다크가 다르다
+    "sky": {
+        "top": ["#e8f4fb", "#b8dcf0", "#7cc0e8", "#3d9fdb", "#1479c9"],
+        "dirtL": "#3d5468", "dirtR": "#6a8296",
+        "topDark": ["#14202c", "#1d4460", "#2a6b94", "#3a95c7", "#58b6f8"],
+        "dirtLDark": "#101c26", "dirtRDark": "#22384a",
+        "lbl": "#5d7f95", "lblDark": "#8badc4",
+    },
 }
 
 
 def fetch():
+    """달력을 받아 온다.
+
+    GRASS_USER 가 있으면 그 사람 것을, 없으면 토큰 주인 것을 본다. CI 는
+    저장소 토큰으로 도는데 그 주인이 봇이라 viewer 로는 빈 달력이 온다.
+    다만 남의 자격으로 보면 비공개 기여는 안 세므로, 그것까지 넣으려면
+    본인 PAT 를 GITHUB_TOKEN 으로 넣어야 한다.
+    """
     cache = os.environ.get("GRASS_CAL")
     if cache and pathlib.Path(cache).exists():
         return json.loads(pathlib.Path(cache).read_text())
+    login = os.environ.get("GRASS_USER")
+    who = f'user(login:"{login}")' if login else "viewer"
+    key = "user" if login else "viewer"
+    query = "{ %s { %s } }" % (who, CAL)
     token = os.environ.get("GITHUB_TOKEN")
     if token:
         req = urllib.request.Request(
             "https://api.github.com/graphql",
-            data=json.dumps({"query": QUERY}).encode(),
+            data=json.dumps({"query": query}).encode(),
             headers={"Authorization": f"bearer {token}",
                      "Content-Type": "application/json"},
         )
         with urllib.request.urlopen(req, timeout=60) as r:
             payload = json.load(r)
     else:
-        out = subprocess.run(["gh", "api", "graphql", "-f", f"query={QUERY}"],
+        out = subprocess.run(["gh", "api", "graphql", "-f", f"query={query}"],
                              capture_output=True, text=True, check=True)
         payload = json.loads(out.stdout)
-    cal = payload["data"]["viewer"]["contributionsCollection"]["contributionCalendar"]
+    cal = payload["data"][key]["contributionsCollection"]["contributionCalendar"]
     if cache:
         pathlib.Path(cache).write_text(json.dumps(cal))
     return cal
@@ -151,41 +172,62 @@ def sprite(d, dy=0):
 
 
 def runner_css(rows_lv, ox, oy, nw):
-    """캐릭터가 밟고 갈 자리를 주 단위 키프레임으로 깐다.
+    """칸에서 칸으로 폴짝 뛰고, 착지하면 다음 박자까지 가만히 서 있게 한다.
 
-    한 주 사이를 steps(6) 로 끊어 2px 씩만 움직이게 한다. 부드럽게 이으면
-    반 픽셀 자리가 생겨 도트가 번진다. 높이가 바뀌는 칸에서는 한 걸음이
-    세로로 더 크게 뛰어 사다리를 오르는 것처럼 보인다.
+    쉬지 않고 움직이면 여섯이 한 화면에서 산만하다. 한 칸을 한 박자로 잡고
+    그중 앞의 30% 만 도약에 쓴다. 나머지 70% 는 다음 키프레임이 같은 자리라
+    저절로 멈춰 선다 — 서 있는 동안을 따로 그릴 필요가 없다.
+
+    가로는 steps(4) 로 3px 씩 끊어 옮긴다. 부드럽게 이으면 반 픽셀 자리가
+    생겨 도트가 번진다. 세로는 착지 높이까지 계단으로 오르고 그 위에
+    포물선을 얹는데, 포물선은 칸마다 같으므로 안쪽 그룹에 짧은 반복 하나로
+    건다. 대신 경로의 지연이 칸 길이의 정수배여야 도약과 착지가 안 엇갈린다.
     """
     hw, hh = TW // 2, TH // 2
-    w0, w1 = -2, nw + 1
-    span = w1 - w0
-    dur = WEEK_SEC * span
+    w0 = -3
+    span = -(-(nw + 6) // STEP) * STEP      # 칸 수를 STEP 배수로 올린다
+    w1 = w0 + span
+    dur = CELL_SEC * span
+    n = len(ROWS)
+
+    arc = "".join(f"{k * JUMP * 100 / len(ARC):.4g}%{{transform:translateY({v}px)}}"
+                  for k, v in enumerate(ARC))
+    arc += f"{JUMP * 100:.4g}%,100%{{transform:translateY(0)}}"
     css = [f".ch{{animation:fade {dur:.2f}s linear infinite}}",
-           f".fa{{animation:legA {LEG}s linear infinite}}",
-           f".fb{{animation:legB {LEG}s linear infinite}}",
-           "@keyframes fade{0%,3%{opacity:0}6%,94%{opacity:1}97%,100%{opacity:0}}",
-           "@keyframes legA{0%,49%{opacity:1}50%,100%{opacity:0}}",
-           "@keyframes legB{0%,49%{opacity:0}50%,100%{opacity:1}}"]
+           f".hp{{animation:hop {CELL_SEC}s steps(1,start) infinite}}",
+           f".fa{{animation:legA {CELL_SEC}s linear infinite}}",
+           f".fb{{animation:legB {CELL_SEC}s linear infinite}}",
+           "@keyframes fade{0%,2%{opacity:0}5%,95%{opacity:1}98%,100%{opacity:0}}",
+           "@keyframes hop{" + arc + "}",
+           # 뜬 동안만 두 번째 포즈, 서 있는 동안은 첫 번째 포즈
+           f"@keyframes legA{{0%,{JUMP*100-1:.4g}%{{opacity:0}}"
+           f"{JUMP*100:.4g}%,100%{{opacity:1}}}}",
+           f"@keyframes legB{{0%,{JUMP*100-1:.4g}%{{opacity:1}}"
+           f"{JUMP*100:.4g}%,100%{{opacity:0}}}}"]
+
+    def spot(wd, wi):
+        lv = rows_lv[wd][wi] if 0 <= wi < nw else 0
+        return (ox + (wi + wd) * hw, oy + (wd - wi) * hh - lv * LEVEL_H)
+
     home = []
     for i, wd in enumerate(ROWS):
         kf = []
-        for k, wi in enumerate(range(w0, w1 + 1)):
-            lv = rows_lv[wd][wi] if 0 <= wi < nw else 0
-            x = ox + (wi + wd) * hw
-            y = oy + (wd - wi) * hh - lv * LEVEL_H
-            kf.append(f"{k * 100 / span:.3f}%{{transform:translate({x}px,{y}px)}}")
-            if wi == (w0 + w1) // 2:
-                home.append((x, y))
+        for k in range(span + 1):
+            x, y = spot(wd, w0 + k)
+            kf.append(f"{k * 100 / span:.4g}%{{transform:translate({x}px,{y}px)}}")
+            if k < span:                       # 도약이 끝나는 순간 = 다음 칸 자리
+                nx, ny = spot(wd, w0 + k + 1)
+                kf.append(f"{(k + JUMP) * 100 / span:.4g}%"
+                          f"{{transform:translate({nx}px,{ny}px)}}")
+        home.append(spot(wd, (w0 + w1) // 2))
         css.append(f"@keyframes r{i}{{" + "".join(kf) + "}")
         css.append(f".p{i}{{animation:r{i} {dur:.2f}s steps({STEP},end) infinite}}")
-    for i in range(len(ROWS)):
-        d = -dur * i / len(ROWS)
-        css.append(f".c{i},.p{i}{{animation-delay:{d:.2f}s}}")
-        css.append(f".f{i}{{animation-delay:{-LEG * i / len(ROWS):.3f}s}}")
-    stop = ",".join(f".p{i}" for i in range(len(ROWS)))
+    for i in range(n):
+        # 칸 단위로만 어긋나게 한다 — 반 칸이 섞이면 도약과 착지가 엇박이 된다
+        css.append(f".d{i}{{animation-delay:{-CELL_SEC * round(span * i / n):.2f}s}}")
+    stop = ",".join(f".p{i}" for i in range(n))
     css.append("@media (prefers-reduced-motion:reduce){"
-               f".ch,.fa,.fb,{stop}{{animation:none}}}}")
+               f".ch,.hp,.fa,.fb,{stop}{{animation:none}}}}")
     return css, home
 
 
@@ -231,11 +273,12 @@ def build(cal, pal):
     css += rcss
     for i, name in enumerate(RUNNERS):
         hx, hy = home[i]
-        s.append(f'<g class="ch c{i}"><g class="p{i}" '
+        s.append(f'<g class="ch d{i}"><g class="p{i} d{i}" '
                  f'transform="translate({hx},{hy})">'
-                 f'<g class="fa f{i}">{sprite(run[f"a-{name}"])}</g>'
-                 f'<g class="fb f{i}" opacity="0">{sprite(run[f"b-{name}"], HOP)}</g>'
-                 f'</g></g>')
+                 f'<g class="hp d{i}">'
+                 f'<g class="fa d{i}">{sprite(run[f"a-{name}"])}</g>'
+                 f'<g class="fb d{i}" opacity="0">{sprite(run[f"b-{name}"])}</g>'
+                 f'</g></g></g>')
 
     # 요일 — 왼쪽 모서리 바깥
     for wd, name in WD.items():
@@ -268,7 +311,9 @@ def build(cal, pal):
 
 if __name__ == "__main__":
     cal = fetch()
-    svg, W, H, steps = build(cal, PAL)
-    OUT.write_text(svg)
-    print(f"  {OUT.relative_to(ROOT)}  {W}x{H}  {OUT.stat().st_size//1024}KB")
+    name = os.environ.get("GRASS_PALETTE", "green")
+    out = pathlib.Path(os.environ.get("GRASS_OUT") or OUT)
+    svg, W, H, steps = build(cal, PALETTES[name])
+    out.write_text(svg)
+    print(f"  {out}  {name}  {W}x{H}  {out.stat().st_size//1024}KB")
     print(f"  단계 경계: 1~{steps[0]} / ~{steps[1]} / ~{steps[2]} / 그 이상")
