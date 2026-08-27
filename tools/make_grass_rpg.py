@@ -29,15 +29,21 @@ BAND = 3                        # 옆면 위쪽 잔디 띠
 DAYS = 7
 PAD_L, PAD_R, PAD_T, PAD_B = 56, 70, 76, 44
 
-DOT = 2                         # 도트 한 칸의 화면 픽셀 — 8x12 도트가 16x24px 이
-                                # 되어 블록 한 칸과 키가 같다
-RUNNERS = ["norma", "sparxie", "kei", "aria", "nangong", "sunna"]
+DOT = 1                         # 도트 한 칸의 화면 픽셀. 15x21 도트가 그대로
+                                # 15x21px 이다 — 전(16x24px)보다 작으면서 칸은
+                                # 네 배다. 얼굴이 성립하는 최소 격자가 15x21 인
+                                # 근거는 tools/draw_runners.py 머리말에 있다
+RUNNERS = ["norma", "sparkle", "kei", "aria", "nangongyu", "sunna"]
 ROWS = [1, 2, 3, 4, 5, 6]       # 각자 다른 요일 줄을 달린다
                                 # 0(맨 뒷줄)은 뒤가 허공이라 떠 보인다 — 비운다
 CELL_SEC = 0.75                 # 한 칸 주기 — 뛰는 동안과 서 있는 동안을 합친 것
-JUMP = 0.30                     # 그중 뛰는 몫. 나머지는 착지해서 가만히 있는다
+PREP = 0.08                     # 웅크리는 몫. 이게 없으면 예비동작 없이 몸이 튄다
+JUMP = 0.30                     # 도약이 끝나는 지점(= 착지)
+LAND = 0.38                     # 착지해서 눌려 있는 동안. 그 뒤로는 서 있는다
 STEP = 4                        # 뛰는 동안 몇 번에 나눠 옮기나 — 12px/4 = 3px 씩
 ARC = [0, -7, -10, -6]          # 도약 중 몸이 뜨는 높이 — 마리오처럼 포물선
+POSE = ["c", "j", "l", "s"]     # 웅크림·공중·착지·서기. 아래 WIN 과 짝이다
+WIN = [(0, PREP), (PREP, JUMP), (JUMP, LAND), (LAND, 1)]
 
 CAL = """contributionsCollection { contributionCalendar {
   totalContributions
@@ -171,16 +177,20 @@ def sprite(d, dy=0):
 
 
 def runner_css(rows_lv, ox, oy, nw):
-    """칸에서 칸으로 폴짝 뛰고, 착지하면 다음 박자까지 가만히 서 있게 한다.
+    """웅크렸다 한 칸 뛰고, 착지해서 눌렸다가, 다음 박자까지 서 있게 한다.
 
     쉬지 않고 움직이면 여섯이 한 화면에서 산만하다. 한 칸을 한 박자로 잡고
-    그중 앞의 30% 만 도약에 쓴다. 나머지 70% 는 다음 키프레임이 같은 자리라
-    저절로 멈춰 선다 — 서 있는 동안을 따로 그릴 필요가 없다.
+    앞쪽 일부만 도약에 쓴다. 남는 동안은 다음 키프레임이 같은 자리라 저절로
+    멈춰 선다 — 서 있는 동안을 따로 그릴 필요가 없다.
+
+    도약 앞에 웅크리는 몫(PREP)을 둔다. 그동안 가로 위치는 제자리로 묶어야
+    웅크린 채 미끄러지지 않는다. 그래서 칸마다 키프레임이 셋이다 — 시작,
+    웅크림이 끝나는 자리(같은 값), 도약이 끝나는 다음 칸.
 
     가로는 steps(4) 로 3px 씩 끊어 옮긴다. 부드럽게 이으면 반 픽셀 자리가
-    생겨 도트가 번진다. 세로는 착지 높이까지 계단으로 오르고 그 위에
-    포물선을 얹는데, 포물선은 칸마다 같으므로 안쪽 그룹에 짧은 반복 하나로
-    건다. 대신 경로의 지연이 칸 길이의 정수배여야 도약과 착지가 안 엇갈린다.
+    생겨 도트가 번진다. 세로 포물선은 칸마다 같으므로 안쪽 그룹에 짧은 반복
+    하나로 건다. 대신 경로의 지연이 칸 길이의 정수배여야 도약과 착지가 안
+    엇갈린다.
     """
     hw, hh = TW // 2, TH // 2
     w0 = -3
@@ -189,20 +199,29 @@ def runner_css(rows_lv, ox, oy, nw):
     dur = CELL_SEC * span
     n = len(ROWS)
 
-    arc = "".join(f"{k * JUMP * 100 / len(ARC):.4g}%{{transform:translateY({v}px)}}"
-                  for k, v in enumerate(ARC))
+    # 포물선은 웅크림이 끝난 뒤에 시작해 착지에서 0 으로 돌아온다
+    fly = JUMP - PREP
+    arc = f"0%,{PREP*100:.4g}%{{transform:translateY(0)}}"
+    arc += "".join(
+        f"{(PREP + (k + 1) * fly / len(ARC)) * 100:.4g}%"
+        f"{{transform:translateY({v}px)}}" for k, v in enumerate(ARC[1:] + [0]))
     arc += f"{JUMP * 100:.4g}%,100%{{transform:translateY(0)}}"
+
     css = [f".ch{{animation:fade {dur:.2f}s linear infinite}}",
            f".hp{{animation:hop {CELL_SEC}s steps(1,start) infinite}}",
-           f".fa{{animation:legA {CELL_SEC}s linear infinite}}",
-           f".fb{{animation:legB {CELL_SEC}s linear infinite}}",
            "@keyframes fade{0%,2%{opacity:0}5%,95%{opacity:1}98%,100%{opacity:0}}",
-           "@keyframes hop{" + arc + "}",
-           # 뜬 동안만 두 번째 포즈, 서 있는 동안은 첫 번째 포즈
-           f"@keyframes legA{{0%,{JUMP*100-1:.4g}%{{opacity:0}}"
-           f"{JUMP*100:.4g}%,100%{{opacity:1}}}}",
-           f"@keyframes legB{{0%,{JUMP*100-1:.4g}%{{opacity:1}}"
-           f"{JUMP*100:.4g}%,100%{{opacity:0}}}}"]
+           "@keyframes hop{" + arc + "}"]
+    # 자세는 제 구간에서만 보인다. 경계를 1/1000 박자 앞에서 끊어 두 장이
+    # 같은 순간에 겹치지 않게 한다
+    for j, (a, b) in enumerate(WIN):
+        on, off = a * 100, b * 100
+        kf = [] if a == 0 else [f"0%,{on - .1:.4g}%{{opacity:0}}"]
+        kf.append(f"{on:.4g}%{{opacity:1}}")
+        kf.append(f"{off - .1:.4g}%{{opacity:1}}" if b < 1 else "100%{opacity:1}")
+        if b < 1:
+            kf.append(f"{off:.4g}%,100%{{opacity:0}}")
+        css.append(f"@keyframes f{j}{{" + "".join(kf) + "}")
+        css.append(f".f{j}{{animation:f{j} {CELL_SEC}s linear infinite}}")
 
     def spot(wd, wi):
         lv = rows_lv[wd][wi] if 0 <= wi < nw else 0
@@ -214,7 +233,10 @@ def runner_css(rows_lv, ox, oy, nw):
         for k in range(span + 1):
             x, y = spot(wd, w0 + k)
             kf.append(f"{k * 100 / span:.4g}%{{transform:translate({x}px,{y}px)}}")
-            if k < span:                       # 도약이 끝나는 순간 = 다음 칸 자리
+            if k < span:
+                # 웅크리는 동안은 제자리, 도약이 끝나는 순간 다음 칸 자리
+                kf.append(f"{(k + PREP) * 100 / span:.4g}%"
+                          f"{{transform:translate({x}px,{y}px)}}")
                 nx, ny = spot(wd, w0 + k + 1)
                 kf.append(f"{(k + JUMP) * 100 / span:.4g}%"
                           f"{{transform:translate({nx}px,{ny}px)}}")
@@ -225,8 +247,9 @@ def runner_css(rows_lv, ox, oy, nw):
         # 칸 단위로만 어긋나게 한다 — 반 칸이 섞이면 도약과 착지가 엇박이 된다
         css.append(f".d{i}{{animation-delay:{-CELL_SEC * round(span * i / n):.2f}s}}")
     stop = ",".join(f".p{i}" for i in range(n))
+    frames = ",".join(f".f{j}" for j in range(len(POSE)))
     css.append("@media (prefers-reduced-motion:reduce){"
-               f".ch,.hp,.fa,.fb,{stop}{{animation:none}}}}")
+               f".ch,.hp,{frames},{stop}{{animation:none}}}}")
     return css, home
 
 
@@ -272,12 +295,12 @@ def build(cal, pal):
     css += rcss
     for i, name in enumerate(RUNNERS):
         hx, hy = home[i]
+        poses = "".join(
+            f'<g class="f{j} d{i}"{"" if p == POSE[0] else " opacity=\"0\""}>'
+            f'{sprite(run[f"{p}-{name}"])}</g>' for j, p in enumerate(POSE))
         s.append(f'<g class="ch d{i}"><g class="p{i} d{i}" '
                  f'transform="translate({hx},{hy})">'
-                 f'<g class="hp d{i}">'
-                 f'<g class="fa d{i}">{sprite(run[f"a-{name}"])}</g>'
-                 f'<g class="fb d{i}" opacity="0">{sprite(run[f"b-{name}"])}</g>'
-                 f'</g></g></g>')
+                 f'<g class="hp d{i}">{poses}</g></g></g>')
 
     # 요일 — 왼쪽 모서리 바깥
     for wd, name in WD.items():
