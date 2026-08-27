@@ -42,6 +42,6 @@
 <a href="https://github.com/2rami"><img src="./assets/connect-github.svg" width="279" alt="GitHub 2rami"/></a>
 
 <!-- ═══════════════ DEBI & MARLENE ═══════════════ -->
-<a href="https://github.com/2rami/debi-marlene"><img src="./assets/dm/spring.png" width="279" alt="debi & marlene — spring"/></a>
-<a href="https://github.com/2rami/debi-marlene"><img src="./assets/dm/summer.png" width="279" alt="debi & marlene — summer"/></a>
-<a href="https://github.com/2rami/debi-marlene"><img src="./assets/dm/sunset.png" width="279" alt="debi & marlene — sunset"/></a>
+<a href="https://github.com/2rami/debi-marlene"><img src="./assets/dm/cafe.png" width="279" alt="debi & marlene — cafe"/></a>
+<a href="https://github.com/2rami/debi-marlene"><img src="./assets/dm/swim.png" width="279" alt="debi & marlene — swimsuit"/></a>
+<a href="https://github.com/2rami/debi-marlene"><img src="./assets/dm/guard.png" width="279" alt="debi & marlene — bodyguard"/></a>
