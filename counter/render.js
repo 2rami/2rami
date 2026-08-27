@@ -42,6 +42,15 @@ const BOT = 3;
 const PDOT = 3;           // 카드 위 숫자의 도트 한 칸
 const DW = 5, DH = 7;     // 숫자 도트 격자
 const LBL = 9;
+// 리드미에서 이 카드는 잔디 오른쪽에 선다. 칸 폭이 캐릭터마다 달라서 수가
+// 바뀔 때마다 카드 폭이 흔들리고, 그때마다 두 덩이의 오른쪽 끝이 어긋난다.
+// 그래서 폭을 이 값으로 고정하고 안을 가운데로 모은다 — 늘어나는 건 하늘과
+// 바닥이지 캐릭터가 아니라서 도트가 안 뭉개진다(2026-08-27).
+//
+// 210 은 두 자리 최대폭이다 — 제일 넓은 9 가 둘 서면 200, 최소 여백 4 씩.
+// 세 자리가 되면 이 값을 넘으므로 그때는 잔디를 846-4-실제폭 으로 다시 굽는다.
+const MINW = 210;
+const MINPAD = 4;         // 꽉 찰 때 양옆에 남기는 최소 여백
 const INK = "#12293a";    // 카드는 그림에 흰색으로 박혀 있어 명암 모드와 무관하다
 const H_CHAR = sprites.h;
 const CELL_H = TOP + H_CHAR + GROUND + BOT;
@@ -90,7 +99,8 @@ export function render(count, label = "visitors") {
   const s = String(Math.max(0, Math.floor(count)));
   const n = s.length;
   const cells = [...s].map((c) => sprites.slots[Number(c)]);
-  const W = PAD * 2 + cells.reduce((a, sl) => a + sl.w, 0) + (n - 1) * GAP;
+  const inner = cells.reduce((a, sl) => a + sl.w, 0) + (n - 1) * GAP;
+  const W = Math.max(MINW, inner + MINPAD * 2);
   const H = PAD * 2 + CELL_H + (label ? LBL + 5 : 0);
 
   const css = [];
@@ -155,7 +165,7 @@ export function render(count, label = "visitors") {
       `width="${W - PAD * 2}" height="3" rx="1.5"/>`
   );
 
-  let x = PAD;
+  let x = Math.round((W - inner) / 2);
   for (let i = 0; i < n; i++) {
     const d = Number(s[i]);
     const sl = cells[i];
