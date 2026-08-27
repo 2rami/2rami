@@ -24,7 +24,7 @@ NFS = 72                      # 이름 — 소개글의 네 배라야 머리로 
 NY = 56
 BFS = 18
 LINES = [                     # None 은 문단 사이 빈 줄
-    "Designer + AI-Assisted Developer",
+    "Designer + AI Native Engineer",
     "South Korea",
     None,
     "Building a terminal, discord bots, slack agents and games",
@@ -65,7 +65,7 @@ def main():
 
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
            f'width="{W}" height="{H}" role="img" '
-           f'aria-label="{NAME} — Designer and AI-Assisted Developer">'
+           f'aria-label="{NAME} — Designer and AI Native Engineer">'
            f'<style>{STYLE}'
            f'@keyframes tp{{to{{opacity:1}}}}'
            f'@keyframes bl{{0%,50%{{opacity:1}}50.01%,100%{{opacity:0}}}}'

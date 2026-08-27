@@ -1,5 +1,5 @@
 <!-- ═══════════════ HERO ═══════════════ -->
-<a href="https://github.com/2rami/2rami"><img src="./assets/title.svg" width="585" alt="2rami — Designer and AI-Assisted Developer"/></a>
+<a href="https://github.com/2rami/2rami"><img src="./assets/title.svg" width="585" alt="2rami — Designer and AI Native Engineer"/></a>
 <a href="https://github.com/2rami/kasaterm"><img src="./assets/hero.svg" width="257" alt="terminal"/></a>
 
 ```json
@@ -11,7 +11,7 @@
 }
 ```
 
-<img src="./assets/band.gif" width="846" alt="pixel art scenes"/>
+<img src="./assets/band.png" width="846" alt=""/>
 
 <!-- ═══════════════ WHAT I BUILD ═══════════════ -->
 <img src="./assets/heads/build.svg" height="30" alt="What I Build"/>
