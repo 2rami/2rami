@@ -22,28 +22,47 @@ OUT = ROOT / "assets" / "grass-rpg.svg"
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 import textpath as T  # noqa: E402
 
-TW, TH = 24, 12                 # 타일 마름모 폭·높이 — 2:1 이라야 정육면체로 보인다
-LEVEL_H = 12                    # 한 단계 = 정육면체 한 개 (TW 의 절반)
-FLOOR = 6                       # 0 단계에서도 보이는 바닥 두께
-BAND = 3                        # 옆면 위쪽 잔디 띠
+TW, TH = 20, 4                  # 타일 마름모 폭·높이. 2:1 이 정석이지만 그러면 세로가
+                                # 너무 길어진다 — 리드미 한 줄에서 방문자 카운터와 나란히
+                                # 서야 해서 납작하게 눕혔다(2026-08-27 지시)
+LEVEL_H = 8                     # 한 단계 블록 높이
+FLOOR = 4                       # 0 단계에서도 보이는 바닥 두께
+BAND = 2                        # 옆면 위쪽 잔디 띠
 DAYS = 7
-PAD_L, PAD_R, PAD_T, PAD_B = 56, 70, 76, 44
+# 캔버스를 640x192 로 떨어뜨리는 여백. 리드미 한 줄 폭 846 에서 오른쪽 방문자
+# 카운터 202 와 그림 사이 간격 4 를 빼면 640 이고, 높이는 카운터와 같은 192 라야
+# 두 덩이 아랫변이 한 줄에 선다(2026-08-27 확정)
+PAD_L, PAD_R, PAD_T, PAD_B = 24, 16, 22, 14
 
-DOT = 1                         # 도트 한 칸의 화면 픽셀. 15x21 도트가 그대로
-                                # 15x21px 이다 — 전(16x24px)보다 작으면서 칸은
-                                # 네 배다. 얼굴이 성립하는 최소 격자가 15x21 인
-                                # 근거는 tools/draw_runners.py 머리말에 있다
+DOT = 1                         # 도트 한 칸의 화면 픽셀. 도트가 세로 24 라
+                                # 캐릭터가 블록 세 단 높이다
 RUNNERS = ["norma", "sparkle", "kei", "aria", "nangongyu", "sunna"]
 ROWS = [1, 2, 3, 4, 5, 6]       # 각자 다른 요일 줄을 달린다
                                 # 0(맨 뒷줄)은 뒤가 허공이라 떠 보인다 — 비운다
+POSES = 4                       # 러닝 프레임 수
 CELL_SEC = 0.75                 # 한 칸 주기 — 뛰는 동안과 서 있는 동안을 합친 것
 PREP = 0.08                     # 웅크리는 몫. 이게 없으면 예비동작 없이 몸이 튄다
 JUMP = 0.30                     # 도약이 끝나는 지점(= 착지)
 LAND = 0.38                     # 착지해서 눌려 있는 동안. 그 뒤로는 서 있는다
-STEP = 4                        # 뛰는 동안 몇 번에 나눠 옮기나 — 12px/4 = 3px 씩
-ARC = [0, -7, -10, -6]          # 도약 중 몸이 뜨는 높이 — 마리오처럼 포물선
-POSE = ["c", "j", "l", "s"]     # 웅크림·공중·착지·서기. 아래 WIN 과 짝이다
-WIN = [(0, PREP), (PREP, JUMP), (JUMP, LAND), (LAND, 1)]
+STEP = 2                        # 뛰는 동안 몇 번에 나눠 옮기나. 가로 10px 과 사다리
+                                # 32px 을 둘 다 정수로 쪼개는 값이라 2 다 — 소수가
+                                # 되면 도트가 반 픽셀에 걸려 번진다
+ARC = [0, -8, -12, -7]          # 도약 중 몸이 뜨는 높이 — 마리오처럼 포물선
+LADDER = 4                      # 이 단수 이상 솟은 칸은 점프로 못 오른다. 벽 앞까지
+                                # 간 뒤 기어오른다(2026-08-27 지시 「4칸이상은 사다리
+                                # 모션으로하자」). 한 해 데이터에서 11 곳이 걸린다
+LADDER_MID = 0.45               # 벽 앞에 닿는 박자
+LADDER_TOP = 0.92               # 다 올라간 박자
+# 눌리고 늘어나는 몫. 러닝 프레임이 따로 도니 예전만큼 셀 필요가 없다.
+# 발밑이 원점이라 세로 배율만 건드려도 발은 붙어 있고 몸만 내려앉는다.
+# (박자, 가로배율, 세로배율)
+FLY = JUMP - PREP
+SQUASH = [(0, 1, 1),
+          (PREP, 1.05, 0.94),               # 웅크림
+          (PREP + FLY * .25, 0.97, 1.04),   # 차고 나가며 늘어남
+          (PREP + FLY * .75, 1, 1),         # 공중에서는 그대로
+          (JUMP, 1.06, 0.93),               # 착지 충격
+          (LAND, 1, 1)]
 
 CAL = """contributionsCollection { contributionCalendar {
   totalContributions
@@ -52,7 +71,6 @@ CAL = """contributionsCollection { contributionCalendar {
 
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-WD = {1: "Mon", 3: "Wed", 5: "Fri"}   # GitHub 주는 일요일 시작 — 0 이 일요일이다
 
 PALETTES = {
     # 초록 — 레퍼런스에 충실. 라이트/다크 같은 색이라 어디서 봐도 인상이 같다
@@ -164,11 +182,11 @@ def load_runners():
     return json.loads((pathlib.Path(__file__).parent / "runners.json").read_text())
 
 
-def sprite(d, dy=0):
+def sprite(d, k, dy=0):
     """도트 데이터를 색깔별 path 로. 발밑 가운데가 (0,0) 에 오게 놓는다."""
     ox, oy = -(d["w"] * DOT) // 2, -d["h"] * DOT - dy
     by = {}
-    for y, row in enumerate(d["rows"]):
+    for y, row in enumerate(d["poses"][k]):
         for x, n, c in row:
             by.setdefault(c, []).append(
                 f'M{ox + x * DOT} {oy + y * DOT}h{n * DOT}v{DOT}h-{n * DOT}z')
@@ -183,14 +201,14 @@ def runner_css(rows_lv, ox, oy, nw):
     앞쪽 일부만 도약에 쓴다. 남는 동안은 다음 키프레임이 같은 자리라 저절로
     멈춰 선다 — 서 있는 동안을 따로 그릴 필요가 없다.
 
-    도약 앞에 웅크리는 몫(PREP)을 둔다. 그동안 가로 위치는 제자리로 묶어야
-    웅크린 채 미끄러지지 않는다. 그래서 칸마다 키프레임이 셋이다 — 시작,
-    웅크림이 끝나는 자리(같은 값), 도약이 끝나는 다음 칸.
+    러닝 프레임 넷을 박자 안에서 갈아 끼운다. 웅크림·도약·착지·서 있기에 하나씩
+    배정해 다리가 실제로 움직인다(2026-08-27 지적 「모션이 없는데」). 프레임을
+    공통 캔버스에 정렬해 구웠으므로 갈아 끼워도 몸이 좌우로 안 튄다.
 
-    가로는 steps(4) 로 3px 씩 끊어 옮긴다. 부드럽게 이으면 반 픽셀 자리가
-    생겨 도트가 번진다. 세로 포물선은 칸마다 같으므로 안쪽 그룹에 짧은 반복
-    하나로 건다. 대신 경로의 지연이 칸 길이의 정수배여야 도약과 착지가 안
-    엇갈린다.
+    가로는 steps 로 끊어 옮긴다. 부드럽게 이으면 반 픽셀 자리가 생겨 도트가
+    번진다. 눌림은 칸마다 같으므로 짧은 반복으로 걸지만, 세로 포물선은 칸마다
+    달라야 한다 — 사다리로 오르는 칸에서는 포물선이 없어야 하기 때문이다.
+    그래서 도약만 전체 주기짜리 키프레임으로 캐릭터마다 따로 만든다.
     """
     hw, hh = TW // 2, TH // 2
     w0 = -3
@@ -199,57 +217,76 @@ def runner_css(rows_lv, ox, oy, nw):
     dur = CELL_SEC * span
     n = len(ROWS)
 
-    # 포물선은 웅크림이 끝난 뒤에 시작해 착지에서 0 으로 돌아온다
-    fly = JUMP - PREP
-    arc = f"0%,{PREP*100:.4g}%{{transform:translateY(0)}}"
-    arc += "".join(
-        f"{(PREP + (k + 1) * fly / len(ARC)) * 100:.4g}%"
-        f"{{transform:translateY({v}px)}}" for k, v in enumerate(ARC[1:] + [0]))
-    arc += f"{JUMP * 100:.4g}%,100%{{transform:translateY(0)}}"
+    sq = "".join(f"{t * 100:.4g}%{{transform:scale({sx:g},{sy:g})}}"
+                 for t, sx, sy in SQUASH) + "100%{transform:scale(1,1)}"
 
+    # 프레임 넷이 도는 구간. 서 있는 동안은 한 장으로 고정한다
+    mid = PREP + FLY / 2
+    win = [(LAND, 1.0), (PREP, mid), (mid, JUMP), (JUMP, LAND)]
     css = [f".ch{{animation:fade {dur:.2f}s linear infinite}}",
-           f".hp{{animation:hop {CELL_SEC}s steps(1,start) infinite}}",
+           f".sq{{transform-origin:0 0;"
+           f"animation:sq {CELL_SEC}s steps(1,start) infinite}}",
            "@keyframes fade{0%,2%{opacity:0}5%,95%{opacity:1}98%,100%{opacity:0}}",
-           "@keyframes hop{" + arc + "}"]
-    # 자세는 제 구간에서만 보인다. 경계를 1/1000 박자 앞에서 끊어 두 장이
-    # 같은 순간에 겹치지 않게 한다
-    for j, (a, b) in enumerate(WIN):
-        on, off = a * 100, b * 100
-        kf = [] if a == 0 else [f"0%,{on - .1:.4g}%{{opacity:0}}"]
-        kf.append(f"{on:.4g}%{{opacity:1}}")
-        kf.append(f"{off - .1:.4g}%{{opacity:1}}" if b < 1 else "100%{opacity:1}")
-        if b < 1:
-            kf.append(f"{off:.4g}%,100%{{opacity:0}}")
-        css.append(f"@keyframes f{j}{{" + "".join(kf) + "}")
-        css.append(f".f{j}{{animation:f{j} {CELL_SEC}s linear infinite}}")
+           "@keyframes sq{" + sq + "}"]
+    for j, (t0, t1) in enumerate(win):
+        kf = [(0.0, 1 if j == 0 else 0)]
+        if t0 > 0:
+            kf.append((t0, 1))
+        if t1 < 1:
+            kf.append((t1, 0))
+        last = 1 if t1 >= 1 else 0
+        css.append(f"@keyframes f{j}{{" + "".join(
+            f"{t * 100:.4g}%{{opacity:{v}}}" for t, v in kf)
+            + f"100%{{opacity:{last}}}}}")
+        css.append(f".f{j}{{animation:f{j} {CELL_SEC}s steps(1,start) infinite}}")
 
     def spot(wd, wi):
         lv = rows_lv[wd][wi] if 0 <= wi < nw else 0
         return (ox + (wi + wd) * hw, oy + (wd - wi) * hh - lv * LEVEL_H)
 
+    def lvl(wd, wi):
+        return rows_lv[wd][wi] if 0 <= wi < nw else 0
+
     home = []
     for i, wd in enumerate(ROWS):
-        kf = []
+        kf, arc = [], []
         for k in range(span + 1):
-            x, y = spot(wd, w0 + k)
-            kf.append(f"{k * 100 / span:.4g}%{{transform:translate({x}px,{y}px)}}")
-            if k < span:
-                # 웅크리는 동안은 제자리, 도약이 끝나는 순간 다음 칸 자리
-                kf.append(f"{(k + PREP) * 100 / span:.4g}%"
-                          f"{{transform:translate({x}px,{y}px)}}")
-                nx, ny = spot(wd, w0 + k + 1)
-                kf.append(f"{(k + JUMP) * 100 / span:.4g}%"
+            wi = w0 + k
+            x, y = spot(wd, wi)
+            nx, ny = spot(wd, wi + 1)
+            pct = k * 100 / span
+            kf.append(f"{pct:.4g}%{{transform:translate({x}px,{y}px)}}")
+            if k >= span:
+                break
+            # 웅크리는 동안은 제자리 — 웅크린 채 미끄러지면 안 된다
+            kf.append(f"{(k + PREP) * 100 / span:.4g}%"
+                      f"{{transform:translate({x}px,{y}px)}}")
+            if lvl(wd, wi + 1) - lvl(wd, wi) >= LADDER:
+                # 벽 앞까지 간 뒤 수직으로 오른다. 벽 앞은 다음 칸 자리에 지금 높이
+                kf.append(f"{(k + LADDER_MID) * 100 / span:.4g}%"
+                          f"{{transform:translate({nx}px,{y - hh}px)}}")
+                kf.append(f"{(k + LADDER_TOP) * 100 / span:.4g}%"
                           f"{{transform:translate({nx}px,{ny}px)}}")
+                continue
+            kf.append(f"{(k + JUMP) * 100 / span:.4g}%"
+                      f"{{transform:translate({nx}px,{ny}px)}}")
+            for m, v in enumerate(ARC):
+                arc.append(f"{(k + PREP + m * FLY / (len(ARC) - 1)) * 100 / span:.4g}%"
+                           f"{{transform:translateY({v}px)}}")
+            arc.append(f"{(k + JUMP) * 100 / span:.4g}%{{transform:translateY(0)}}")
         home.append(spot(wd, (w0 + w1) // 2))
         css.append(f"@keyframes r{i}{{" + "".join(kf) + "}")
         css.append(f".p{i}{{animation:r{i} {dur:.2f}s steps({STEP},end) infinite}}")
+        css.append("@keyframes h%d{0%%{transform:translateY(0)}%s100%%"
+                   "{transform:translateY(0)}}" % (i, "".join(arc)))
+        css.append(f".h{i}{{animation:h{i} {dur:.2f}s linear infinite}}")
     for i in range(n):
         # 칸 단위로만 어긋나게 한다 — 반 칸이 섞이면 도약과 착지가 엇박이 된다
         css.append(f".d{i}{{animation-delay:{-CELL_SEC * round(span * i / n):.2f}s}}")
-    stop = ",".join(f".p{i}" for i in range(n))
-    frames = ",".join(f".f{j}" for j in range(len(POSE)))
+    stop = ",".join(f".p{i},.h{i}" for i in range(n))
     css.append("@media (prefers-reduced-motion:reduce){"
-               f".ch,.hp,{frames},{stop}{{animation:none}}}}")
+               f".ch,.sq,.f0,.f1,.f2,.f3,{stop}{{animation:none}}"
+               ".f0{opacity:1}.f1,.f2,.f3{opacity:0}}")
     return css, home
 
 
@@ -295,17 +332,13 @@ def build(cal, pal):
     css += rcss
     for i, name in enumerate(RUNNERS):
         hx, hy = home[i]
-        poses = "".join(
-            f'<g class="f{j} d{i}"{"" if p == POSE[0] else " opacity=\"0\""}>'
-            f'{sprite(run[f"{p}-{name}"])}</g>' for j, p in enumerate(POSE))
+        poses = "".join(f'<g class="f{j} d{i}">{sprite(run[name], j)}</g>'
+                        for j in range(POSES))
         s.append(f'<g class="ch d{i}"><g class="p{i} d{i}" '
                  f'transform="translate({hx},{hy})">'
-                 f'<g class="hp d{i}">{poses}</g></g></g>')
+                 f'<g class="h{i} d{i}"><g class="sq d{i}">'
+                 f'{poses}</g></g></g></g>')
 
-    # 요일 — 왼쪽 모서리 바깥
-    for wd, name in WD.items():
-        s.append(T.text(name, ox - hw - 8, oy + wd * hh + 4, 9,
-                        cls="lbl", weight="regular", anchor="end"))
     # 월 — 아래쪽 대각 모서리를 따라
     seen = set()
     for wi, w in enumerate(weeks):
@@ -325,7 +358,9 @@ def build(cal, pal):
         s.append(f'<path class="t{i}" d="M{lx + i*14} {ly-3}L{lx + i*14 + 6} {ly-8}'
                  f'L{lx + i*14 + 12} {ly-3}L{lx + i*14 + 6} {ly+2}Z"/>')
     s.append(T.text("More", lx + 5 * 14, ly, 9, cls="lbl", weight="regular"))
-    s.append(T.text(f'{cal["totalContributions"]} contributions', PAD_L, H - 14, 10,
+    # 합계는 왼쪽 위에. 아래쪽에 두면 낮은 지형과 겹쳐 글씨가 안 읽히고,
+    # 아이소메트릭 대각선이 만드는 좌상단 빈 자리가 마침 여기다
+    s.append(T.text(f'{cal["totalContributions"]} contributions', PAD_L, PAD_T + 12, 10,
                     cls="lbl", weight="regular"))
     s.append("</svg>")
     return "\n".join(s).replace("__CSS__", "\n" + "\n".join(css) + "\n"), W, H, steps
