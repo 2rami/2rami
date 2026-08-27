@@ -9,6 +9,8 @@ skillicons.dev 의 아이콘을 그대로 걸면 검은 각진 사각형이 하�
 도트 글자와 안 어울린다 — 계단이 보여야 같은 그림으로 읽힌다.
 """
 
+import math
+
 N = 16   # 격자 한 변
 
 # 5x7 도트 글자. 로고 안에 들어가는 것만 (Ps · Ae · TS · R).
@@ -133,10 +135,62 @@ def git():
     return [("#f05033", dia), ("#ffffff", line | node)]
 
 
+def dart():
+    """같은 각도로 겹쳐 내려가는 두 톤 파랑. 채워진 쐐기 하나와 그 위를 지나는
+    얇은 띠 하나다.
+
+    바로 옆이 Flutter 라 그쪽의 '<' 꺾임과 안 겹치게 각도를 한 방향으로만
+    남겼다 — 전에는 접힌 종이로 그려서 둘 다 「파란 접힌 조각」으로 보였다.
+    """
+    dk = {(x, y) for y in range(4, 15) for x in range(3, 15) if x - 3 <= y - 4}
+    lt = {(x, y) for y in range(0, 12) for x in range(3, 15) if 0 <= x - 3 - y <= 3}
+    return [("#40c4ff", lt), ("#0175c2", dk)]
+
+
+def godot():
+    """로봇 머리. 눈이 얼굴 폭의 절반을 먹어야 16칸에서 로봇으로 읽힌다."""
+    head = box(2, 2, 13, 2) | box(1, 3, 14, 12) | box(3, 13, 12, 14)
+    eyes = box(3, 6, 6, 9) | box(9, 6, 12, 9)
+    pupil = box(4, 7, 5, 8) | box(10, 7, 11, 8)
+    mouth = box(5, 11, 10, 12)
+    return [("#478cbf", head), ("#ffffff", eyes | mouth), ("#414042", pupil)]
+
+
+def claude():
+    """앤트로픽 마크 — 가운데서 뻗는 여덟 갈래. 팔을 한 칸으로 그으면 별표가
+    되므로 안쪽에 심을 두고 거기서 뻗게 한다."""
+    cells = set(box(6, 6, 9, 9))
+    for k in range(8):
+        a = math.pi * k / 4
+        for t in range(2, 8):
+            x, y = int(round(7.5 + math.cos(a) * t)), int(round(7.5 + math.sin(a) * t))
+            if 0 <= x < N and 0 <= y < N:
+                cells.add((x, y))
+                if t < 5:                      # 안쪽 절반만 굵게 — 끝으로 갈수록 가늘어진다
+                    for dx, dy in ((1, 0), (0, 1)):
+                        if 0 <= x + dx < N and 0 <= y + dy < N:
+                            cells.add((x + dx, y + dy))
+    return [("#d97757", cells)]
+
+
+def slack():
+    """네 갈래 바람개비. 진짜 로고는 막대 끝이 둥글지만 16칸에서는 그 곡률이
+    한 칸도 안 되니 각진 막대로 찍고, 대신 **가운데를 십자로 비운다** — 이
+    로고를 읽게 하는 건 색 넷이 아니라 서로 어긋나게 도는 배치다.
+    전에는 막대 넷을 흩어 놓기만 해서 색 조각 넷으로만 보였다."""
+    return [("#2eb67d", box(0, 4, 6, 6) | box(4, 1, 6, 3)),      # 좌상 — 왼쪽으로 뻗고 위로 꺾인다
+            ("#ecb22e", box(9, 0, 11, 6) | box(12, 4, 14, 6)),   # 우상
+            ("#e01e5a", box(9, 9, 15, 11) | box(9, 12, 11, 14)),  # 우하
+            ("#36c5f0", box(4, 9, 6, 15) | box(1, 9, 3, 11))]     # 좌하
+
+
+# 언어 → 엔진·프레임워크 → 디자인 → 도구 순. 리드미 한 줄 폭 846 을 열둘로 나눠
+# 세우므로 개수를 바꾸면 make_stack 이 간격을 다시 계산한다.
 LOGOS = [
-    ("Rust", rust), ("Python", python_), ("TypeScript", typescript),
-    ("Flutter", flutter), ("Figma", figma), ("Photoshop", photoshop),
-    ("AfterFX", aftereffects), ("Git", git),
+    ("Rust", rust), ("Python", python_), ("TypeScript", typescript), ("Dart", dart),
+    ("Flutter", flutter), ("Godot", godot),
+    ("Figma", figma), ("Photoshop", photoshop), ("AfterFX", aftereffects),
+    ("Claude", claude), ("Slack", slack), ("Git", git),
 ]
 
 

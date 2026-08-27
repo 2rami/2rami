@@ -32,6 +32,7 @@ ICON = L.N * DOT            # 48
 PAD = 8
 SIDE = ICON + PAD * 2       # 정사각 칸 64
 GAP = 8
+W = 846                    # 리드미 한 줄 폭
 
 STYLE = """
   .chip{fill:#f4fafe;stroke:#bcdcef}
@@ -39,8 +40,14 @@ STYLE = """
 """
 
 
-def dots(layers, ox, oy):
-    """도트 집합을 rect 로. 가로로 이어진 칸은 한 사각형으로 묶는다."""
+def dots(layers, ox, oy, dot=None):
+    """도트 집합을 rect 로. 가로로 이어진 칸은 한 사각형으로 묶는다.
+
+    dot 을 안 주면 이 모듈의 칸 크기를 쓴다. 배지처럼 더 작은 칸으로 그리는
+    쪽에서 값을 넘긴다 — 예전에는 부르는 쪽이 제 DOT 으로 자리를 재고 여기서는
+    스택의 DOT 으로 그려서, 로고가 칩 높이를 4px 넘어 삐져나갔다.
+    """
+    dot = DOT if dot is None else dot
     out = []
     for color, cells in layers:
         if not cells:
@@ -53,21 +60,30 @@ def dots(layers, ox, oy):
                 j = i
                 while j + 1 < len(xs) and xs[j + 1] == xs[j] + 1:
                     j += 1
-                run.append(f'<rect x="{ox + xs[i] * DOT}" y="{oy + y * DOT}" '
-                           f'width="{(j - i + 1) * DOT}" height="{DOT}"/>')
+                run.append(f'<rect x="{ox + xs[i] * dot}" y="{oy + y * dot}" '
+                           f'width="{(j - i + 1) * dot}" height="{dot}"/>')
                 i = j + 1
         out.append(f'<g fill="{color}">{"".join(run)}</g>')
     return "".join(out)
 
 
 def stack():
+    """칸을 리드미 한 줄 폭에 정확히 걸쳐 세운다.
+
+    간격을 상수로 두면 칸 개수가 바뀔 때마다 오른쪽 끝이 잔디·띠와 어긋난다
+    (2026-08-27 지적: "끝단이나 그리드좀 맞춰봐"). 그래서 남는 폭을 칸 사이로
+    나눠 반올림한다 — 간격이 한 칸씩 들쭉날쭉해지지만 1px 라 안 보이고,
+    마지막 칸의 오른쪽 변은 늘 W 에 정확히 선다.
+    """
     names = [n for n, _ in L.LOGOS]
-    w = len(L.LOGOS) * SIDE + (len(L.LOGOS) - 1) * GAP
+    n = len(L.LOGOS)
+    w = W
+    step = (w - SIDE) / (n - 1)
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {SIDE}" '
              f'width="{w}" height="{SIDE}" role="img" '
              f'aria-label="{", ".join(names)}">', f"<style>{STYLE}</style>"]
     for i, (name, fn) in enumerate(L.LOGOS):
-        x = i * (SIDE + GAP)
+        x = round(i * step)
         parts.append(f'<rect class="chip" x="{x + .5}" y=".5" width="{SIDE - 1}" '
                      f'height="{SIDE - 1}" rx="10" stroke-width="1"/>')
         parts.append(dots(fn(), x + PAD, PAD))
@@ -78,4 +94,4 @@ def stack():
 if __name__ == "__main__":
     svg, w = stack()
     (OUT / "stack.svg").write_text(svg)
-    print(f"  stack.svg  {w}x{SIDE} · 칸 8개 · {len(svg)//1024}KB")
+    print(f"  stack.svg  {w}x{SIDE} · 칸 {len(L.LOGOS)}개 · {len(svg)//1024}KB")
