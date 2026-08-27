@@ -40,3 +40,8 @@
 <a href="https://discord.com/users/omufrozen"><img src="./assets/connect-discord.svg" width="279" alt="Discord @omufrozen"/></a>
 <a href="mailto:goenho0613@gmail.com"><img src="./assets/connect-mail.svg" width="279" alt="goenho0613@gmail.com"/></a>
 <a href="https://github.com/2rami"><img src="./assets/connect-github.svg" width="279" alt="GitHub 2rami"/></a>
+
+<!-- ═══════════════ DEBI & MARLENE ═══════════════ -->
+<a href="https://github.com/2rami/debi-marlene"><img src="./assets/dm/spring.png" width="279" alt="debi & marlene — spring"/></a>
+<a href="https://github.com/2rami/debi-marlene"><img src="./assets/dm/summer.png" width="279" alt="debi & marlene — summer"/></a>
+<a href="https://github.com/2rami/debi-marlene"><img src="./assets/dm/sunset.png" width="279" alt="debi & marlene — sunset"/></a>
