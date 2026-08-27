@@ -11,7 +11,7 @@
 }
 ```
 
-<img src="./assets/band.png" width="846" alt=""/>
+<img src="./assets/band.gif" width="846" alt="pixel art scenes"/>
 
 <!-- ═══════════════ WHAT I BUILD ═══════════════ -->
 <img src="./assets/heads/build.svg" height="30" alt="What I Build"/>
