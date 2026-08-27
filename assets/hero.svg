@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 190" width="240" height="190" role="img" aria-label="terminal">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 257 188" width="257" height="188" role="img" aria-label="terminal">
 <style>
   .win{fill:#f4fafe;stroke:#bcdcef}
   .bar{fill:#e3f1fb}
@@ -13,16 +13,16 @@
   .blink{animation:bl 1s steps(1) infinite}
   @keyframes bl{0%,50%{opacity:1}50.01%,100%{opacity:0}}
   .scan{animation:sc 9.0s linear infinite}
-  @keyframes sc{from{transform:translateY(0)}to{transform:translateY(190px)}}
+  @keyframes sc{from{transform:translateY(0)}to{transform:translateY(188px)}}
 
   .l0{opacity:1}
   .l1{opacity:0;animation:k1 9.0s infinite}@keyframes k1{0%,19.99%{opacity:0}20.00%,100%{opacity:1}}
   .l2{opacity:0;animation:k2 9.0s infinite}@keyframes k2{0%,39.99%{opacity:0}40.00%,100%{opacity:1}}
   .l3{opacity:0;animation:k3 9.0s infinite}@keyframes k3{0%,59.99%{opacity:0}60.00%,100%{opacity:1}}
   .l4{opacity:0;animation:k4 9.0s infinite}@keyframes k4{0%,79.99%{opacity:0}80.00%,100%{opacity:1}}</style>
-<rect class="win" x=".5" y=".5" width="239" height="189" rx="7" stroke-width="1"/>
-<path class="bar" d="M.5 7.5a7 7 0 017-7h225a7 7 0 017 7v15H.5z"/>
-<line x1="0" y1="22" x2="240" y2="22" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/>
+<rect class="win" x=".5" y=".5" width="256" height="187" rx="7" stroke-width="1"/>
+<path class="bar" d="M.5 7.5a7 7 0 017-7h242a7 7 0 017 7v15H.5z"/>
+<line x1="0" y1="22" x2="257" y2="22" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/>
 <rect x="11" y="8" width="6" height="6" rx="1" fill="#ff5f56"/>
 <rect x="24" y="8" width="6" height="6" rx="1" fill="#ffbd2e"/>
 <rect x="37" y="8" width="6" height="6" rx="1" fill="#27c93f"/>
@@ -33,6 +33,6 @@
 <g class="l3"><g transform="translate(12.00,107.00) scale(0.01100,-0.01100)" class="pr"><path transform="translate(0.0,0)" d="M60 -101V36H148V122H237V207H325V293H414V327H325V412H237V498H148V583H60V720H187V634H275V549H364V463H451V377H541V242H451V156H364V71H275V-15H187V-101Z"/></g><g transform="translate(20.80,107.00) scale(0.01100,-0.01100)" class="out"><path transform="translate(0.0,0)" d="M241 -12V78H151V350H60V450H151V631H251V450H525V350H251V88H515V179H616V78H525V-12Z"/><path transform="translate(677.0,0)" d="M151 -12V78H60V359H151V450H433V359H525V260H423V350H161V270H343V169H161V88H423V180H525V79H433V-12Z"/><path transform="translate(1263.0,0)" d="M60 -12V359H151V450H433V359H525V260H423V350H161V-12Z"/><path transform="translate(1849.0,0)" d="M60 -12V450H343V359H423V450H616V359H706V-12H606V350H433V-12H333V350H161V-12Z"/><path transform="translate(2616.0,0)" d="M60 -12V450H161V-12ZM60 530V631H161V530Z"/><path transform="translate(2838.0,0)" d="M60 -12V450H433V359H525V-12H423V350H161V-12Z"/><path transform="translate(3424.0,0)" d="M151 -12V78H60V359H151V450H433V359H525V88H616V-12H515V78H433V-12ZM161 88H423V350H161Z"/><path transform="translate(4101.0,0)" d="M60 -12V631H161V-12Z"/><path transform="translate(4723.0,0)" d="M151 -12V78H60V631H161V450H433V359H525V78H433V-12ZM161 88H423V350H161Z"/><path transform="translate(5309.0,0)" d="M151 -12V78H60V359H151V450H433V359H525V78H433V-12ZM161 88H423V350H161Z"/><path transform="translate(5895.0,0)" d="M241 -12V78H151V350H60V450H151V631H251V450H525V350H251V88H515V179H616V78H525V-12Z"/><path transform="translate(6572.0,0)" d="M60 -12V88H423V169H151V260H60V359H151V450H525V350H161V270H433V179H525V78H433V-12Z"/></g></g>
 <g class="l4"><g transform="translate(12.00,128.00) scale(0.01100,-0.01100)" class="pr"><path transform="translate(0.0,0)" d="M60 -101V36H148V122H237V207H325V293H414V327H325V412H237V498H148V583H60V720H187V634H275V549H364V463H451V377H541V242H451V156H364V71H275V-15H187V-101Z"/></g><g transform="translate(20.80,128.00) scale(0.01100,-0.01100)" class="out"><path transform="translate(0.0,0)" d="M151 -193V-103H60V-3H161V-93H424V78H151V169H60V359H151V450H434V359H525V-103H434V-193ZM161 179H424V350H161Z"/><path transform="translate(586.0,0)" d="M151 -12V78H60V359H151V450H433V359H525V88H616V-12H515V78H433V-12ZM161 88H423V350H161Z"/><path transform="translate(1263.0,0)" d="M60 -12V450H343V359H423V450H616V359H706V-12H606V350H433V-12H333V350H161V-12Z"/><path transform="translate(2030.0,0)" d="M151 -12V78H60V359H151V450H433V359H525V260H423V350H161V270H343V169H161V88H423V180H525V79H433V-12Z"/><path transform="translate(2616.0,0)" d="M60 -12V88H423V169H151V260H60V359H151V450H525V350H161V270H433V179H525V78H433V-12Z"/><path transform="translate(3602.0,0)" d="M151 -12V78H60V359H151V450H433V359H525V88H616V-12H515V78H433V-12ZM161 88H423V350H161Z"/><path transform="translate(4279.0,0)" d="M151 -193V-103H60V-3H161V-93H424V78H151V169H60V359H151V450H434V359H525V-103H434V-193ZM161 179H424V350H161Z"/><path transform="translate(4865.0,0)" d="M151 -12V78H60V359H151V450H433V359H525V260H423V350H161V270H343V169H161V88H423V180H525V79H433V-12Z"/><path transform="translate(5451.0,0)" d="M60 -12V450H433V359H525V-12H423V350H161V-12Z"/><path transform="translate(6037.0,0)" d="M241 -12V78H151V350H60V450H151V631H251V450H525V350H251V88H515V179H616V78H525V-12Z"/><path transform="translate(6714.0,0)" d="M60 -12V88H423V169H151V260H60V359H151V450H525V350H161V270H433V179H525V78H433V-12Z"/></g></g>
 <rect class="cur blink" x="12" y="140" width="7" height="11"/>
-<rect class="scan" x="0" y="-190" width="240" height="190" fill="url(#g)" opacity=".05"/>
+<rect class="scan" x="0" y="-188" width="257" height="188" fill="url(#g)" opacity=".05"/>
 <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="transparent"/><stop offset=".9" stop-color="#58b6f8"/><stop offset="1" stop-color="transparent"/></linearGradient></defs>
 </svg>

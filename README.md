@@ -1,6 +1,6 @@
 <!-- ═══════════════ HERO ═══════════════ -->
-<img src="./assets/title.svg" width="585" alt="2rami — Designer and AI-Assisted Developer"/>
-<img src="./assets/hero.svg" width="257" alt="terminal"/>
+<a href="https://github.com/2rami/2rami"><img src="./assets/title.svg" width="585" alt="2rami — Designer and AI-Assisted Developer"/></a>
+<a href="https://github.com/2rami/kasaterm"><img src="./assets/hero.svg" width="257" alt="terminal"/></a>
 
 ```json
 {
@@ -31,8 +31,8 @@
 <!-- ═══════════════ CONTRIBUTION ═══════════════ -->
 <img src="./assets/heads/contrib.svg" height="30" alt="Contribution"/>
 
-<img src="./assets/grass-rpg.svg" width="632" alt="Contribution RPG"/>
-<img src="https://2rami.vercel.app/counter.svg" width="210" alt="visitor counter"/>
+<a href="https://github.com/2rami/2rami"><img src="./assets/grass-rpg.svg" width="632" alt="Contribution RPG"/></a>
+<a href="https://github.com/2rami/2rami"><img src="https://2rami.vercel.app/counter.svg" width="210" alt="visitor counter"/></a>
 
 <!-- ═══════════════ CONNECT ═══════════════ -->
 <img src="./assets/heads/connect.svg" height="30" alt="Connect"/>
