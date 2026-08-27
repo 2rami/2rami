@@ -22,11 +22,19 @@ from make_stack import dots
 
 OUT = HERE.parent / "assets"
 
-DOT = 2
-ICON = L.N * DOT            # 32
-H = 44
-FS = 15
-PADL, MID, PADR = 10, 14, 12
+# 로고를 칩 높이의 3/4 까지 키우면 글자보다 두 배가 되어, 배지가 아니라 아이콘
+# 옆에 캡션이 붙은 꼴로 읽힌다(2026-08-27 지적: "디코 지메일 아이콘도 크기 커서
+# 안맞고"). 로고:글자를 1.7 배쯤으로 낮춘다.
+DOT = 1.5
+ICON = L.N * DOT            # 24
+H = 38
+FS = 14
+MID = 11
+
+# 셋을 한 줄에 세울 때 폭이 제각각이면 오른쪽 끝이 들쭉날쭉해진다. 리드미 한 줄
+# 폭 846 을 셋으로 나눠 고정한다 — 마크다운이 그림 사이에 4px 를 넣으므로
+# 279*3 + 4*2 = 845 로 한 줄에 앉는다. 내용은 칩 안에서 가운데로 모은다.
+BW = 279
 
 STYLE = """
   .chip{fill:#f4fafe;stroke:#bcdcef}
@@ -47,24 +55,24 @@ def badge(slug, label, fn):
     ys = [y for _, cells in layers for _, y in cells]
     x0, x1, y0, y1 = min(xs), max(xs) + 1, min(ys), max(ys) + 1
     lw = (x1 - x0) * DOT
-    ox, oy = PADL - x0 * DOT, (H - (y1 - y0) * DOT) // 2 - y0 * DOT
-    tw = round(T.measure(label, FS, "bold"))
-    tx = PADL + lw + MID
-    w = tx + tw + PADR
+    tw = T.measure(label, FS, "bold")
+    inner = lw + MID + tw
+    ox = (BW - inner) / 2 - x0 * DOT
+    oy = (H - (y1 - y0) * DOT) / 2 - y0 * DOT
+    tx = (BW - inner) / 2 + lw + MID
     body = []
     for color, cells in layers:
         cls = {"MONO": "mono", None: "hole"}.get(color)
-        chunk = dots([(color if cls is None else "#000", cells)], ox, oy)
+        chunk = dots([(color if cls is None else "#000", cells)], ox, oy, DOT)
         body.append(chunk.replace('fill="#000"', f'class="{cls}"') if cls else chunk)
-    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {H}" '
-            f'width="{w}" height="{H}" role="img" aria-label="{label}">'
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {BW} {H}" '
+            f'width="{BW}" height="{H}" role="img" aria-label="{label}">'
             f'<style>{STYLE}</style>'
-            f'<rect class="chip" x=".5" y=".5" width="{w - 1}" height="{H - 1}" '
+            f'<rect class="chip" x=".5" y=".5" width="{BW - 1}" height="{H - 1}" '
             f'rx="8" stroke-width="1"/>'
             + "".join(body)
-            + T.text(label, tx, H / 2 + FS * .36, FS,
-                     weight="bold", cls="nm")
-            + "</svg>"), w
+            + T.text(label, tx, H / 2 + FS * .36, FS, weight="bold", cls="nm")
+            + "</svg>"), BW
 
 
 if __name__ == "__main__":

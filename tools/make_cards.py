@@ -23,7 +23,7 @@ ROOT = pathlib.Path(__file__).parent.parent
 ICONS = ROOT / "assets" / "icons"
 OUT = ROOT / "assets" / "cards"
 
-W, H = 415, 132
+W, H = 421, 132            # 421*2 + 마크다운이 넣는 4px = 리드미 한 줄 폭 846
 PAD = 18
 
 # GitHub 언어 색
@@ -123,7 +123,7 @@ def main():
         p = OUT / f"{r['name']}.svg"
         p.write_text(card(r))
         print(f"  {p.relative_to(ROOT)}  {p.stat().st_size:>6}B")
-    print(f"\n{len(repos)}장 · 카드 {W}x{H} · 2열 기준 폭 {W*2+16}px")
+    print(f"\n{len(repos)}장 · 카드 {W}x{H} · 2열 폭 {W*2+4}px")
 
 
 if __name__ == "__main__":
