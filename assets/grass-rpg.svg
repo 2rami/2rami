@@ -152,6 +152,11 @@
 <path class="dl" d="M556 42L566 44L566 70L556 68Z"/>
 <path class="b3" d="M576 40L566 42L566 44L576 42Z"/>
 <path class="dr" d="M576 42L566 44L566 70L576 68Z"/>
+<path class="t0" d="M576 64L586 62L596 64L586 66Z"/>
+<path class="a0" d="M576 64L586 66L586 68L576 66Z"/>
+<path class="dl" d="M576 66L586 68L586 70L576 68Z"/>
+<path class="b0" d="M596 64L586 66L586 68L596 66Z"/>
+<path class="dr" d="M596 66L586 68L586 70L596 68Z"/>
 <path class="t1" d="M486 58L496 56L506 58L496 60Z"/>
 <path class="a1" d="M486 58L496 60L496 62L486 60Z"/>
 <path class="dl" d="M486 60L496 62L496 72L486 70Z"/>
